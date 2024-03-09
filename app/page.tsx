@@ -1,6 +1,6 @@
-"use client";
 import { MainNavigationMenu } from "@/components/navbar";
 import Hero from "@/components/hero";
+import { InputForm } from "@/components/form";
 
 export default function Home() {
   return (
@@ -9,6 +9,7 @@ export default function Home() {
       <main className="flex-1">
         <div className="container relative">
           <Hero />
+          <InputForm />
         </div>
       </main>
     </div>

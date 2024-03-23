@@ -21,7 +21,7 @@ model User {
 }
 
 model UserProfile {
-  profileid      String   @id @unique
+  profileid      String   @id @default(cuid())
   firstName      String
   lastName       String
   bio            String
@@ -31,7 +31,8 @@ model UserProfile {
   followerCount  Int      @default(0)
   profilePicture String
 
-  user User @relation(fields: [profileid], references: [id])
+  userid String @unique
+  user   User   @relation(fields: [userid], references: [id])
 }
 
 model Post {

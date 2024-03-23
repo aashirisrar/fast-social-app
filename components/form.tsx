@@ -17,6 +17,8 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 
 const formSchema = z.object({
+  userName: z.string(),
+  password: z.string(),
   email: z.string(),
 });
 
@@ -24,6 +26,8 @@ export function InputForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      userName: "",
+      password: "",
       email: "",
     },
   });
@@ -43,12 +47,40 @@ export function InputForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
+          name="userName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>User Name:</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g aashir_israr" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password:</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g 123456" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email:</FormLabel>
               <FormControl>
-                <Input placeholder="e.g Italian Pizza" {...field} />
+                <Input placeholder="e.g example@email.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -12,9 +12,9 @@ datasource db {
 
 model User {
   userId     String   @id @unique @default(cuid())
-  userName   String
+  userName   String   @unique
   password   String
-  email      String
+  email      String   @unique
   registerAt DateTime @default(now())
 
   profile UserProfile?

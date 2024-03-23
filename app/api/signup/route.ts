@@ -3,15 +3,17 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
+    const { userName, password, email } = await req.json();
 
-    const createdEmail = await prisma.user.create({
+    const createdUser = await prisma.user.create({
       data: {
+        userName,
+        password,
         email,
       },
     });
 
-    return NextResponse.json({ newUser: createdEmail }, { status: 200 });
+    return NextResponse.json({ newUser: createdUser }, { status: 200 });
   } catch (e) {
     return NextResponse.json({ data: e }, { status: 500 });
   }

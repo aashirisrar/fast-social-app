@@ -11,17 +11,23 @@ datasource db {
 }
 
 model User {
-  id         String   @id @unique @default(cuid())
+  userId     String   @id @unique @default(cuid())
   userName   String
   password   String
   email      String
   registerAt DateTime @default(now())
 
   profile UserProfile?
+
+  posts    Post[]
+  comments Comments[]
+
+  Followers Followers[]
+  Following Following[]
 }
 
 model UserProfile {
-  profileid      String   @id @default(cuid())
+  profileid      String   @id @unique @default(cuid())
   firstName      String
   lastName       String
   bio            String
@@ -32,32 +38,49 @@ model UserProfile {
   profilePicture String
 
   userid String @unique
-  user   User   @relation(fields: [userid], references: [id])
+  user   User   @relation(fields: [userid], references: [userId])
 }
 
 model Post {
   postId       String   @id @unique @default(cuid())
-  userId       String
   body         String
   title        String
   likeCount    Int      @default(0)
   commentCount Int      @default(0)
   image        String
   createdAt    DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [userId])
+
+  comments Comments[]
 }
 
 model Comments {
   commentId String   @id @unique @default(cuid())
-  postId    String
-  userId    String
   postedAt  DateTime
   body      String
   likeCount Int      @default(0)
+
+  userId String
+  User   User   @relation(fields: [userId], references: [userId])
+
+  postId String
+  Post   Post?  @relation(fields: [postId], references: [postId])
 }
 
 model Followers {
   id                 String   @id @unique @default(cuid())
-  followerId         Int
-  followingId        Int
   startedFollowingAt DateTime
+
+  followerId String
+  follower   User   @relation(fields: [followerId], references: [userId])
+}
+
+model Following {
+  id                 String   @id @unique @default(cuid())
+  startedFollowingAt DateTime
+
+  followingId String
+  following   User   @relation(fields: [followingId], references: [userId])
 }

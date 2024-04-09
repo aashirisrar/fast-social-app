@@ -53,7 +53,7 @@ export function InputForm() {
             <FormItem>
               <FormLabel>User Name:</FormLabel>
               <FormControl>
-                <Input placeholder="e.g aashir_israr" {...field} />
+                <Input required type="text" placeholder="e.g aashir_israr" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -66,7 +66,7 @@ export function InputForm() {
             <FormItem>
               <FormLabel>Email:</FormLabel>
               <FormControl>
-                <Input placeholder="e.g example@email.com" {...field} />
+                <Input required type="email" placeholder="e.g example@email.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -79,7 +79,7 @@ export function InputForm() {
             <FormItem>
               <FormLabel>Password:</FormLabel>
               <FormControl>
-                <Input placeholder="e.g 123456" {...field} />
+                <Input required type="password" placeholder="e.g 123456" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

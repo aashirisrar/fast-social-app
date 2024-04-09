@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
+import Link from "next/link";
 
 const formSchema = z.object({
   userName: z.string(),
@@ -44,7 +45,7 @@ export function InputForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="userName"
@@ -58,21 +59,6 @@ export function InputForm() {
             </FormItem>
           )}
         />
-
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password:</FormLabel>
-              <FormControl>
-                <Input placeholder="e.g 123456" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <FormField
           control={form.control}
           name="email"
@@ -86,8 +72,28 @@ export function InputForm() {
             </FormItem>
           )}
         />
-
-        <Button type="submit">Add Item</Button>
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password:</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g 123456" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="w-full">
+          Create an account
+        </Button>
+        <div className="mt-4 text-center text-sm">
+          Already have an account?{" "}
+          <Link href="/sign-in" className="underline">
+            Sign in
+          </Link>
+        </div>
       </form>
     </Form>
   );

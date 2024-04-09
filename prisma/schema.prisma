@@ -11,11 +11,13 @@ datasource db {
 }
 
 model User {
-  userId     String   @id @unique @default(cuid())
+  id     String   @id @unique @default(cuid())
   userName   String   @unique
   password   String
   email      String   @unique
   registerAt DateTime @default(now())
+
+  emailVerified DateTime?
 
   profile UserProfile?
 
@@ -24,6 +26,27 @@ model User {
 
   Followers Followers[]
   Following Following[]
+
+   accounts      Account[]
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
 }
 
 model UserProfile {
@@ -38,7 +61,7 @@ model UserProfile {
   profilePicture String
 
   userid String @unique
-  user   User   @relation(fields: [userid], references: [userId])
+  user   User   @relation(fields: [userid], references: [id])
 }
 
 model Post {
@@ -51,7 +74,7 @@ model Post {
   createdAt    DateTime @default(now())
 
   userId String
-  user   User   @relation(fields: [userId], references: [userId])
+  user   User   @relation(fields: [userId], references: [id])
 
   comments Comments[]
 }
@@ -63,7 +86,7 @@ model Comments {
   likeCount Int      @default(0)
 
   userId String
-  User   User   @relation(fields: [userId], references: [userId])
+  User   User   @relation(fields: [userId], references: [id])
 
   postId String
   Post   Post?  @relation(fields: [postId], references: [postId])
@@ -74,7 +97,7 @@ model Followers {
   startedFollowingAt DateTime
 
   followerId String
-  follower   User   @relation(fields: [followerId], references: [userId])
+  follower   User   @relation(fields: [followerId], references: [id])
 }
 
 model Following {
@@ -82,5 +105,5 @@ model Following {
   startedFollowingAt DateTime
 
   followingId String
-  following   User   @relation(fields: [followingId], references: [userId])
+  following   User   @relation(fields: [followingId], references: [id])
 }

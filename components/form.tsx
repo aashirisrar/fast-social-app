@@ -17,7 +17,8 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import { FormError } from "./form-error";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 
 const formSchema = z.object({
   userName: z.string(),
@@ -29,7 +30,6 @@ export function InputForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,14 +45,13 @@ export function InputForm() {
       try {
         const resp = await axios.post("api/signup", values);
         setError(resp.data.error);
+        setSuccess(resp.data.success);
         //   location.reload();
         //console.log(resp.data.error);
       } catch (error) {
         console.log(error);
       }
-
-    })
-
+    });
   }
 
   return (
@@ -65,7 +64,13 @@ export function InputForm() {
             <FormItem>
               <FormLabel>User Name:</FormLabel>
               <FormControl>
-                <Input disabled={isPending} required type="text" placeholder="e.g aashir_israr" {...field} />
+                <Input
+                  disabled={isPending}
+                  required
+                  type="text"
+                  placeholder="e.g aashir_israr"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -78,7 +83,13 @@ export function InputForm() {
             <FormItem>
               <FormLabel>Email:</FormLabel>
               <FormControl>
-                <Input disabled={isPending} required type="email" placeholder="e.g example@email.com" {...field} />
+                <Input
+                  disabled={isPending}
+                  required
+                  type="email"
+                  placeholder="e.g example@email.com"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -91,13 +102,20 @@ export function InputForm() {
             <FormItem>
               <FormLabel>Password:</FormLabel>
               <FormControl>
-                <Input disabled={isPending} required type="password" placeholder="e.g 123456" {...field} />
+                <Input
+                  disabled={isPending}
+                  required
+                  type="password"
+                  placeholder="e.g 123456"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <FormError message={error} />
+        <FormSuccess message={success} />
         <Button type="submit" className="w-full">
           Create an account
         </Button>

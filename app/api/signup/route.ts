@@ -11,11 +11,14 @@ export async function POST(req: Request) {
     const existinguser = await prisma.user.findUnique({
       where: {
         email,
-      }
+      },
     });
 
     if (existinguser) {
-      return NextResponse.json({ error: "User already exists" }, { status: 200 });
+      return NextResponse.json(
+        { error: "User already exists" },
+        { status: 200 }
+      );
     }
 
     const createdUser = await prisma.user.create({
@@ -28,7 +31,10 @@ export async function POST(req: Request) {
 
     // send verfication token email
 
-    return NextResponse.json({ newUser: createdUser }, { status: 200 });
+    return NextResponse.json(
+      { success: "User Created!", newUser: createdUser },
+      { status: 200 }
+    );
   } catch (e) {
     return NextResponse.json({ data: e }, { status: 500 });
   }

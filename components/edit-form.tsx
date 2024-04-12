@@ -15,9 +15,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 const formSchema = z.object({
     userName: z.string(),
@@ -43,9 +44,35 @@ export function EditForm() {
             lastName: "",
             bio: "",
             gender: "",
-            dob: "",
+            dob: "1998-01-01",
         },
     });
+
+    useEffect(() => {
+        async function fetchUserProfile() {
+            try {
+                const response = await axios.post('/api/getprofile');
+                const userData = response.data.user;
+
+                const dateOfBir = userData.dateOfBirth.split('T')[0];
+
+                // Set default values for form fields using fetched user data
+                form.setValue('userName', userData.name || '');
+                form.setValue('firstName', userData.firstName || '');
+                form.setValue('lastName', userData.lastName || '');
+                form.setValue('bio', userData.bio || '');
+                form.setValue('dob', dateOfBir || '1998-01-01');
+                form.setValue('gender', userData.gender || '');
+
+                // form.setValue('password', ''); 
+
+            } catch (error) {
+                console.error('Error fetching user profile:', error);
+            }
+        }
+
+        fetchUserProfile();
+    }, []);
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         startTransition(async () => {
@@ -157,17 +184,18 @@ export function EditForm() {
                     name="gender"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Gender:</FormLabel>
-                            <FormControl>
-                                <Input
-                                    disabled={isPending}
-
-                                    type="text"
-                                    placeholder="e.g Male/Female"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
+                            <FormLabel>Gender</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select a gender" />
+                                    </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                    <SelectItem value="Male">Male</SelectItem>
+                                    <SelectItem value="Female">Female</SelectItem>
+                                </SelectContent>
+                            </Select>
                         </FormItem>
                     )}
                 />
@@ -180,7 +208,6 @@ export function EditForm() {
                             <FormControl>
                                 <Input
                                     disabled={isPending}
-
                                     type="password"
                                     placeholder="e.g 123456"
                                     {...field}

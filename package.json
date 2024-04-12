@@ -31,6 +31,7 @@
     "eslint-config-next": "14.0.4",
     "lucide-react": "^0.300.0",
     "next": "14.0.4",
+    "next-auth": "^5.0.0-beta.16",
     "next-themes": "^0.2.1",
     "pg": "^8.11.3",
     "postcss": "8.4.32",

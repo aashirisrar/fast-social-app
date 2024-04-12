@@ -17,7 +17,6 @@ export async function POST(req: Request) {
                 { status: 200 }
             );
         }
-        console.log(session?.user?.id);
 
         // update the user's profile
         const updatedUser = await prisma.user.update({
@@ -29,13 +28,13 @@ export async function POST(req: Request) {
                 firstName,
                 lastName,
                 bio,
+                gender,
+                dateOfBirth: new Date(dob),
             }
         })
 
-        console.log(updatedUser);
-
         return NextResponse.json(
-            { success: "Profile Updated!", user: updatedUser },
+            { success: "Profile Updated!" },
             { status: 200 }
         );
     } catch (e) {

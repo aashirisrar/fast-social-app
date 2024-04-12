@@ -42,9 +42,8 @@ export function EditForm() {
             firstName: "",
             lastName: "",
             bio: "",
-            dob: "",
             gender: "",
-
+            dob: "",
         },
     });
 
@@ -54,8 +53,6 @@ export function EditForm() {
                 const resp = await axios.post("api/updateprofile", values);
                 setError(resp.data.error);
                 setSuccess(resp.data.success);
-                //   location.reload();
-                //console.log(resp.data.error);
             } catch (error) {
                 console.log(error);
             }
@@ -146,7 +143,7 @@ export function EditForm() {
                             <FormControl>
                                 <Input
                                     disabled={isPending}
-                                    type="text"
+                                    type="date"
                                     placeholder="e.g 123456"
                                     {...field}
                                 />

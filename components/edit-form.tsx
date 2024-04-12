@@ -34,6 +34,7 @@ export function EditForm() {
     const [isPending, startTransition] = useTransition();
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [genderplaceholder, setGenderplaceholder] = useState("Select a gender");
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -63,6 +64,9 @@ export function EditForm() {
                 form.setValue('bio', userData.bio || '');
                 form.setValue('dob', dateOfBir || '1998-01-01');
                 form.setValue('gender', userData.gender || '');
+
+                // Set placeholder for gender
+                setGenderplaceholder(userData.gender || "Select a gender");
 
                 // form.setValue('password', ''); 
 
@@ -188,7 +192,7 @@ export function EditForm() {
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select a gender" />
+                                        <SelectValue placeholder={genderplaceholder} />
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>

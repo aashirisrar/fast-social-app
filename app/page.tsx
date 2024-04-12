@@ -1,6 +1,7 @@
 import { MainNavigationMenu } from "@/components/navbar";
 import Hero from "@/components/hero";
 import { InputForm } from "@/components/form";
+import { SignIn } from "@/components/sign-up";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <div className="container relative">
           <Hero />
           <InputForm />
+          <SignIn />
         </div>
       </main>
     </div>

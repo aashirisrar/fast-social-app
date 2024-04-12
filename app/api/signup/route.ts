@@ -1,41 +1,47 @@
+import { signIn } from "@/lib/auth";
 import prisma from "@/lib/db";
-import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { userName, password, email } = await req.json();
+    // const { email } = await req.json();
+    const reqBody = await req.json();
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const existinguser = await prisma.user.findUnique({
+    //   where: {
+    //     email,
+    //   },
+    // });
 
-    const existinguser = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    // if (existinguser) {
+    //   return NextResponse.json(
+    //     { error: "User already exists" },
+    //     { status: 200 }
+    //   );
+    // }
 
-    if (existinguser) {
-      return NextResponse.json(
-        { error: "User already exists" },
-        { status: 200 }
-      );
-    }
-
-    const createdUser = await prisma.user.create({
-      data: {
-        userName,
-        password: hashedPassword,
-        email,
-      },
-    });
+    await signIn("resend", reqBody)
 
     // send verfication token email
 
     return NextResponse.json(
-      { success: "User Created!", newUser: createdUser },
+      { success: "User Created!" },
       { status: 200 }
     );
   } catch (e) {
     return NextResponse.json({ data: e }, { status: 500 });
   }
 }
+
+
+// <form
+// action={async (formData) => {
+//     "use server"
+//     await signIn("resend", formData)
+// }}
+// >
+// <input type="text" name="email" placeholder="Email" />
+// <Button type="submit" className="w-full">
+//     Create an account
+// </Button>
+// </form>

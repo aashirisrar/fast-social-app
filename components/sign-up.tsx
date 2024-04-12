@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { signIn } from "@/lib/auth"
+import Link from "next/link";
 
 export function SignIn() {
     return (
@@ -16,6 +17,12 @@ export function SignIn() {
             <Button type="submit" className="w-full">
                 Create an account
             </Button>
+            <div className="mt-4 text-center text-sm">
+                Already have an account?{" "}
+                <Link href="/sign-in" className="underline">
+                    Sign in
+                </Link>
+            </div>
         </form>
     )
 }

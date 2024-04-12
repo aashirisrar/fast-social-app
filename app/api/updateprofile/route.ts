@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
     try {
@@ -8,25 +9,33 @@ export async function POST(req: Request) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        const session = await auth();
 
-        // const existinguser = await prisma.user.findUnique({
-        //     where: {
-        //         email,
-        //     },
-        // });
-
-        // if (existinguser) {
-        //     return NextResponse.json(
-        //         { error: "User already exists" },
-        //         { status: 200 }
-        //     );
-        // }
+        if (!session) {
+            return NextResponse.json(
+                { error: "Not Authenticated!" },
+                { status: 200 }
+            );
+        }
+        console.log(session?.user?.id);
 
         // update the user's profile
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: session?.user?.id
+            },
+            data: {
+                name: userName,
+                firstName,
+                lastName,
+                bio,
+            }
+        })
 
+        console.log(updatedUser);
 
         return NextResponse.json(
-            { success: "Profile Updated!" },
+            { success: "Profile Updated!", user: updatedUser },
             { status: 200 }
         );
     } catch (e) {

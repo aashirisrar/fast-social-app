@@ -67,16 +67,15 @@ export function EditForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                     control={form.control}
-                    name="password"
+                    name="firstName"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>First Name:</FormLabel>
                             <FormControl>
                                 <Input
                                     disabled={isPending}
-                                    required
-                                    type="password"
-                                    placeholder="e.g 123456"
+                                    type="text"
+                                    placeholder="e.g Max"
                                     {...field}
                                 />
                             </FormControl>
@@ -86,16 +85,15 @@ export function EditForm() {
                 />
                 <FormField
                     control={form.control}
-                    name="password"
+                    name="lastName"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Last Name:</FormLabel>
                             <FormControl>
                                 <Input
                                     disabled={isPending}
-                                    required
-                                    type="password"
-                                    placeholder="e.g 123456"
+                                    type="text"
+                                    placeholder="e.g Robinson"
                                     {...field}
                                 />
                             </FormControl>
@@ -112,7 +110,6 @@ export function EditForm() {
                             <FormControl>
                                 <Input
                                     disabled={isPending}
-                                    required
                                     type="text"
                                     placeholder="e.g aashir_israr"
                                     {...field}
@@ -124,15 +121,14 @@ export function EditForm() {
                 />
                 <FormField
                     control={form.control}
-                    name="password"
+                    name="bio"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Bio:</FormLabel>
                             <FormControl>
                                 <Input
                                     disabled={isPending}
-                                    required
-                                    type="password"
+                                    type="text"
                                     placeholder="e.g 123456"
                                     {...field}
                                 />
@@ -143,15 +139,14 @@ export function EditForm() {
                 />
                 <FormField
                     control={form.control}
-                    name="password"
+                    name="dob"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Date of Birth:</FormLabel>
                             <FormControl>
                                 <Input
                                     disabled={isPending}
-                                    required
-                                    type="password"
+                                    type="text"
                                     placeholder="e.g 123456"
                                     {...field}
                                 />
@@ -162,16 +157,16 @@ export function EditForm() {
                 />
                 <FormField
                     control={form.control}
-                    name="password"
+                    name="gender"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Gender:</FormLabel>
                             <FormControl>
                                 <Input
                                     disabled={isPending}
-                                    required
-                                    type="password"
-                                    placeholder="e.g 123456"
+
+                                    type="text"
+                                    placeholder="e.g Male/Female"
                                     {...field}
                                 />
                             </FormControl>
@@ -188,7 +183,7 @@ export function EditForm() {
                             <FormControl>
                                 <Input
                                     disabled={isPending}
-                                    required
+
                                     type="password"
                                     placeholder="e.g 123456"
                                     {...field}
@@ -201,6 +196,7 @@ export function EditForm() {
 
                 <FormError message={error} />
                 <FormSuccess message={success} />
+
                 <Button type="submit" className="w-full">
                     Update Profile
                 </Button>

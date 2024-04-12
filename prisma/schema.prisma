@@ -19,7 +19,14 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profile UserProfile?
+  firstName      String?
+  lastName       String?
+  bio            String?
+  gender         String?
+  dateOfBirth    DateTime?
+  followingCount Int       @default(0)
+  followerCount  Int       @default(0)
+  profilePicture String?
 
   posts    Post[]
   comments Comments[]
@@ -68,21 +75,6 @@ model VerificationToken {
   expires    DateTime
 
   @@id([identifier, token])
-}
-
-model UserProfile {
-  profileid      String   @id @unique @default(cuid())
-  firstName      String
-  lastName       String
-  bio            String
-  gender         String
-  dateOfBirth    DateTime
-  followingCount Int      @default(0)
-  followerCount  Int      @default(0)
-  profilePicture String
-
-  userid String @unique
-  user   User   @relation(fields: [userid], references: [id])
 }
 
 model Post {

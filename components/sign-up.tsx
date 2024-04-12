@@ -1,15 +1,21 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
 import { signIn } from "@/lib/auth"
 
 export function SignIn() {
     return (
-        <form
+        <form className="space-y-4"
             action={async (formData) => {
                 "use server"
                 await signIn("resend", formData)
             }}
         >
-            <input type="text" name="email" placeholder="Email" />
-            <button type="submit">Signin with Resend</button>
+            <label>Email</label>
+            <Input type="text" name="email" placeholder="Email" />
+            <Button type="submit" className="w-full">
+                Create an account
+            </Button>
         </form>
     )
 }

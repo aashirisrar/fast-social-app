@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/form";
 
 import axios from "axios";
+import UploadBtn from "./upload-button";
 
 const formSchema = z.object({
     content: z.string(),
@@ -94,9 +95,12 @@ export function AddPost() {
                                     <FormItem>
                                         <FormLabel>Image:</FormLabel>
                                         <FormControl>
-                                            <Input
+                                            {/* <Input
                                                 type="file"
-                                            />
+                                            /> */}
+                                            <div className="flex justify-center">
+                                                <UploadBtn />
+                                            </div>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>

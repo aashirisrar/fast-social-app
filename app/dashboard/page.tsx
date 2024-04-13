@@ -33,6 +33,7 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Component from "@/components/events";
 import PostItem from "@/components/post-item";
+import { AddPost } from "@/components/add-post";
 
 export default function Dashboard() {
   return (
@@ -53,24 +54,24 @@ export default function Dashboard() {
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
               <Link
                 href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
               >
                 <Home className="h-4 w-4" />
-                Dashboard
+                Home
               </Link>
               <Link
                 href="#"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
                 <ShoppingCart className="h-4 w-4" />
-                Orders
+                Your Profile
                 <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                   6
                 </Badge>
               </Link>
               <Link
                 href="#"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
                 <Package className="h-4 w-4" />
                 Products{" "}
@@ -91,7 +92,7 @@ export default function Dashboard() {
               </Link>
             </nav>
           </div>
-          <div className="mt-auto p-4">
+          {/* <div className="mt-auto p-4">
             <Card x-chunk="dashboard-02-chunk-0">
               <CardHeader className="p-2 pt-0 md:p-4">
                 <CardTitle>Upgrade to Pro</CardTitle>
@@ -106,7 +107,7 @@ export default function Dashboard() {
                 </Button>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex flex-col">
@@ -170,7 +171,7 @@ export default function Dashboard() {
                   Analytics
                 </Link>
               </nav>
-              <div className="mt-auto">
+              {/* <div className="mt-auto">
                 <Card>
                   <CardHeader>
                     <CardTitle>Upgrade to Pro</CardTitle>
@@ -185,7 +186,7 @@ export default function Dashboard() {
                     </Button>
                   </CardContent>
                 </Card>
-              </div>
+              </div> */}
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1">
@@ -194,7 +195,7 @@ export default function Dashboard() {
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Search products..."
+                  placeholder="Search..."
                   className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
                 />
               </div>
@@ -218,11 +219,12 @@ export default function Dashboard() {
           </DropdownMenu>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <div className="flex items-center">
-            <h1 className="text-lg font-semibold md:text-2xl">Inventory</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg font-semibold md:text-2xl">Feed</h1>
+            <AddPost />
           </div>
           <div
-            className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
+            className="flex justify-between rounded-lg border border-dashed shadow-sm"
             x-chunk="dashboard-02-chunk-1"
           >
             {/* <div className="flex flex-col items-center gap-1 text-center">

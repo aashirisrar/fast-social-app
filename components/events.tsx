@@ -5,7 +5,7 @@ export default function Component() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recent Sales</CardTitle>
+        <CardTitle>Events</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-8">
         <div className="flex items-center gap-4">
@@ -14,25 +14,12 @@ export default function Component() {
             <AvatarFallback>OM</AvatarFallback>
           </Avatar>
           <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">Olivia Martin</p>
+            <p className="text-sm font-medium leading-none">Softec</p>
             <p className="text-sm text-muted-foreground">
-              olivia.martin@email.com
+              Orientation
             </p>
           </div>
-          <div className="ml-auto font-medium">+$1,999.00</div>
-        </div>
-        <div className="flex items-center gap-4">
-          <Avatar className="hidden h-9 w-9 sm:flex">
-            <AvatarImage src="/avatars/02.png" alt="Avatar" />
-            <AvatarFallback>JL</AvatarFallback>
-          </Avatar>
-          <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">Jackson Lee</p>
-            <p className="text-sm text-muted-foreground">
-              jackson.lee@email.com
-            </p>
-          </div>
-          <div className="ml-auto font-medium">+$39.00</div>
+          <div className="ml-auto font-medium">1 pm</div>
         </div>
         <div className="flex items-center gap-4">
           <Avatar className="hidden h-9 w-9 sm:flex">
@@ -40,12 +27,12 @@ export default function Component() {
             <AvatarFallback>IN</AvatarFallback>
           </Avatar>
           <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">Isabella Nguyen</p>
+            <p className="text-sm font-medium leading-none">ACM</p>
             <p className="text-sm text-muted-foreground">
-              isabella.nguyen@email.com
+              Visual Vortex
             </p>
           </div>
-          <div className="ml-auto font-medium">+$299.00</div>
+          <div className="ml-auto font-medium">3 pm</div>
         </div>
         <div className="flex items-center gap-4">
           <Avatar className="hidden h-9 w-9 sm:flex">
@@ -53,23 +40,10 @@ export default function Component() {
             <AvatarFallback>WK</AvatarFallback>
           </Avatar>
           <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">William Kim</p>
-            <p className="text-sm text-muted-foreground">will@email.com</p>
+            <p className="text-sm font-medium leading-none">CCS</p>
+            <p className="text-sm text-muted-foreground">Job Fair</p>
           </div>
-          <div className="ml-auto font-medium">+$99.00</div>
-        </div>
-        <div className="flex items-center gap-4">
-          <Avatar className="hidden h-9 w-9 sm:flex">
-            <AvatarImage src="/avatars/05.png" alt="Avatar" />
-            <AvatarFallback>SD</AvatarFallback>
-          </Avatar>
-          <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">Sofia Davis</p>
-            <p className="text-sm text-muted-foreground">
-              sofia.davis@email.com
-            </p>
-          </div>
-          <div className="ml-auto font-medium">+$39.00</div>
+          <div className="ml-auto font-medium">5 pm</div>
         </div>
       </CardContent>
     </Card>

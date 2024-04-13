@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import LikeComponent from "./like";
 
 export default function PostComponent({ username, body, image, likeCount, commentCount, postId }: any) {
   return (
@@ -33,7 +34,7 @@ export default function PostComponent({ username, body, image, likeCount, commen
         </div>
         <div className="flex gap-2">
           {/* add like count here */}
-          <Button variant="outline"><Heart size={16} className="mr-1" />{likeCount}</Button>
+          <LikeComponent postId={postId} likeCount={likeCount} />
           {/* add comment count here */}
           <Button variant="outline"><MessageCircle size={16} className="mr-1" />{commentCount}</Button>
         </div>

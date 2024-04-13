@@ -100,7 +100,7 @@ export function AddPost() {
                                         <FormLabel>Image:</FormLabel>
                                         <FormControl>
                                             <Input
-                                                // className="hidden"
+                                                className="hidden"
                                                 type="text"
                                                 {...field}
                                             />

@@ -53,6 +53,9 @@ export function AddPost() {
         }
     }
 
+    function setLink(link: string) {
+        form.setValue("image", link);
+    }
 
     return (
         <Dialog>
@@ -95,17 +98,19 @@ export function AddPost() {
                                     <FormItem>
                                         <FormLabel>Image:</FormLabel>
                                         <FormControl>
-                                            {/* <Input
-                                                type="file"
-                                            /> */}
-                                            <div className="flex justify-center">
-                                                <UploadBtn />
-                                            </div>
+                                            <Input
+                                                // className="hidden"
+                                                type="text"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
+                            <div className="flex justify-center">
+                                <UploadBtn returnedLink={setLink} />
+                            </div>
                         </form>
                     </Form>
                 </div>

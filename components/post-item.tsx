@@ -1,17 +1,43 @@
-import { DollarSign } from "lucide-react";
+import { Heart, LucideMenu, MessageCircle } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import Image from "next/image";
+import { Button } from "./ui/button";
+import LikeComponent from "./like";
 
-export default function PostItem() {
+export default function PostComponent({ username, body, image, likeCount, commentCount, postId }: any) {
   return (
-    <Card>
+    <Card className="space-y-2 px-6 mb-4 w-[650px]">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-        <DollarSign className="h-4 w-4 text-muted-foreground" />
+        <div className="flex items-center gap-4">
+          <Avatar className="hidden h-9 w-9 sm:flex">
+            <AvatarImage src="/avatars/01.png" alt="Avatar" />
+            <AvatarFallback>OM</AvatarFallback>
+          </Avatar>
+          <div className="grid gap-1">
+            <p className="text-sm font-medium leading-none">Aashir Israr{username}</p>
+            <p className="text-sm text-muted-foreground">
+              2 hours ago
+            </p>
+          </div>
+        </div>
+        <LucideMenu className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">$45,231.89</div>
-        <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+      <CardContent className="space-y-4">
+        <div className="flex flex-col items-start gap-4">
+          <p className="text-sm text-muted-foreground">{body}
+          </p>
+          <div className="bg-red-500 w-full">
+            <Image width={400} style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
+          </div>
+        </div>
+        <div className="flex gap-2">
+          {/* add like count here */}
+          <LikeComponent postId={postId} likeCount={likeCount} />
+          {/* add comment count here */}
+          <Button variant="outline"><MessageCircle size={16} className="mr-1" />{commentCount}</Button>
+        </div>
       </CardContent>
     </Card>
   );

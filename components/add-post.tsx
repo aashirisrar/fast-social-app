@@ -28,6 +28,9 @@ import {
 
 import axios from "axios";
 import UploadBtn from "./upload-button";
+import { useState } from "react";
+import { FormError } from "./form-error";
+import { FormSuccess } from "./form-success";
 
 const formSchema = z.object({
     content: z.string(),
@@ -36,6 +39,9 @@ const formSchema = z.object({
 
 
 export function AddPost() {
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -48,6 +54,9 @@ export function AddPost() {
         console.log(values);
         try {
             const resp = await axios.post("api/addpost", values);
+            setError(resp.data.error);
+            setSuccess(resp.data.success);
+            location.reload();
         } catch (error) {
             console.log(error);
 
@@ -112,6 +121,8 @@ export function AddPost() {
                             <div className="flex justify-center pb-2">
                                 <UploadBtn returnedLink={setLink} />
                             </div>
+                            <FormError message={error} />
+                            <FormSuccess message={success} />
                             <div className="flex justify-end">
                                 <Button type="submit">Create Post</Button>
                             </div>

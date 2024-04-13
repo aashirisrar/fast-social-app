@@ -41,7 +41,6 @@ export default function Dashboard() {
             try {
                 const response = await axios.post('/api/getyourposts');
                 setPosts(response.data.posts);
-                console.log(response.data.posts);
 
             } catch (error) {
                 console.error('Error fetching user profile:', error);
@@ -254,8 +253,8 @@ export default function Dashboard() {
             </div> */}
                         <div className="flex flex-col">
                             {
-                                posts.map((post) => (
-                                    <PostComponent key={post.id} {...post} />
+                                posts.map((post: any) => (
+                                    <PostComponent key={post.postId} {...post} />
                                 ))
                             }
                         </div>

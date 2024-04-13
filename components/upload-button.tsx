@@ -11,7 +11,6 @@ export default function UploadBtn({ returnedLink }: any) {
                 // Do something with the response
                 // console.log("Files: ", res);
                 returnedLink(res[0].url);
-                alert("Upload Completed");
             }}
             onUploadError={(error: Error) => {
                 // Do something with the error.

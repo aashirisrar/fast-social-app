@@ -1,3 +1,9 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -9,11 +15,44 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { PlusCircleIcon } from "lucide-react"
 import { Textarea } from "./ui/textarea"
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+
+import axios from "axios";
+
+const formSchema = z.object({
+    content: z.string(),
+    image: z.string(),
+});
+
 
 export function AddPost() {
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            content: "",
+            image: "",
+        },
+    });
+
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        try {
+            const resp = await axios.post("api/updateprofile", values);
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -23,32 +62,48 @@ export function AddPost() {
                 <DialogHeader>
                     <DialogTitle>Add New Post</DialogTitle>
                     <DialogDescription>
-                        Make changes to your profile here. Click save when you're done.
+                        Add your content and image to post.
                     </DialogDescription>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="username" className="text-right">
-                            Content
-                        </Label>
-                        <Textarea
-                            id="username"
-                            placeholder="Enter content here"
-                            defaultValue=""
-                            className="col-span-3"
-                        />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="username" className="text-right">
-                            Image
-                        </Label>
-                        <Input
-                            id="picture"
-                            type="file"
-                            className="col-span-3"
-                        />
-                    </div>
-
+                <div className="grid py-4">
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                            <FormField
+                                control={form.control}
+                                name="content"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Content:</FormLabel>
+                                        <FormControl>
+                                            <Textarea
+                                                id="username"
+                                                placeholder="Enter content here"
+                                                defaultValue=""
+                                                className="col-span-3"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="image"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Image:</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="file"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </form>
+                    </Form>
                 </div>
                 <DialogFooter>
                     <Button type="submit">Create Post</Button>

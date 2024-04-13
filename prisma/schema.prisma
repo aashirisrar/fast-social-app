@@ -80,7 +80,6 @@ model VerificationToken {
 model Post {
   postId       String   @id @unique @default(cuid())
   body         String
-  title        String
   likeCount    Int      @default(0)
   commentCount Int      @default(0)
   image        String
@@ -107,7 +106,9 @@ model Comments {
 
 model Followers {
   id                 String   @id @unique @default(cuid())
-  startedFollowingAt DateTime
+  startedFollowingAt DateTime @default(now())
+
+  followingId String
 
   followerId String
   follower   User   @relation(fields: [followerId], references: [id])
@@ -115,7 +116,9 @@ model Followers {
 
 model Following {
   id                 String   @id @unique @default(cuid())
-  startedFollowingAt DateTime
+  startedFollowingAt DateTime @default(now())
+
+  followerId String
 
   followingId String
   following   User   @relation(fields: [followingId], references: [id])

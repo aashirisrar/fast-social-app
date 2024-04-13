@@ -45,8 +45,9 @@ export function AddPost() {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log(values);
         try {
-            const resp = await axios.post("api/updateprofile", values);
+            const resp = await axios.post("api/addpost", values);
         } catch (error) {
             console.log(error);
 
@@ -69,7 +70,7 @@ export function AddPost() {
                         Add your content and image to post.
                     </DialogDescription>
                 </DialogHeader>
-                <div className="grid py-4">
+                <div className="grid py-1">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                             <FormField
@@ -108,15 +109,15 @@ export function AddPost() {
                                     </FormItem>
                                 )}
                             />
-                            <div className="flex justify-center">
+                            <div className="flex justify-center pb-2">
                                 <UploadBtn returnedLink={setLink} />
+                            </div>
+                            <div className="flex justify-end">
+                                <Button type="submit">Create Post</Button>
                             </div>
                         </form>
                     </Form>
                 </div>
-                <DialogFooter>
-                    <Button type="submit">Create Post</Button>
-                </DialogFooter>
             </DialogContent>
         </Dialog>
     )

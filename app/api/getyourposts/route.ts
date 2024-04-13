@@ -4,8 +4,6 @@ import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
     try {
-        const { content, image } = await req.json();
-
         const session = await auth();
 
         if (!session) {
@@ -16,17 +14,14 @@ export async function POST(req: Request) {
         }
 
         // create the post
-        const createdPost = await prisma.post.create({
-            data: {
-                title: "Hello",
-                body: content,
-                image,
-                userId: session.user?.id!,
-            },
+        const fetchedPosts = await prisma.post.findMany({
+            where: {
+                userId: session.user?.id!
+            }
         })
 
         return NextResponse.json(
-            { success: "Post Created!", post: createdPost },
+            { success: "Posts Found!", posts: fetchedPosts },
             { status: 200 }
         );
     } catch (e) {

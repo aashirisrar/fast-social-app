@@ -13,10 +13,25 @@ export async function POST(req: Request) {
             );
         }
 
-        // fetch your posts
+        const user = await prisma.user.findUnique({
+            where: {
+                id: session.user?.id!
+            }
+        });
+
+        // fetch the friends of the user
+        const friends = await prisma.following.findMany({
+            where: {
+                followingId: user?.id!
+            }
+        });
+
+        // fetch the post of friends
         const fetchedPosts = await prisma.post.findMany({
             where: {
-                userId: session.user?.id!
+                userId: {
+                    in: friends.map(friend => friend.followingId)
+                }
             }
         })
 

@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import {
   Bell,
@@ -28,8 +30,27 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import EventComponent from "@/components/events";
 import PostComponent from "@/components/post-item";
 import { AddPost } from "@/components/add-post";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Dashboard() {
+
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    async function fetchFriendsPost() {
+      try {
+        const response = await axios.post('/api/getfriendsposts');
+        setPosts(response.data.posts);
+
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    }
+
+    fetchFriendsPost();
+  }, []);
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -231,9 +252,11 @@ export default function Dashboard() {
               <Button className="mt-4">Add Product</Button>
             </div> */}
             <div className="flex flex-col">
-              <PostComponent />
-              <PostComponent />
-              <PostComponent />
+              {
+                posts.map((post: any) => (
+                  <PostComponent key={post.postId} {...post} />
+                ))
+              }
             </div>
             <div>
               <EventComponent />

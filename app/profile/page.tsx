@@ -33,7 +33,7 @@ import { AddPost } from "@/components/add-post";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function Dashboard() {
+export default function Profile() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {

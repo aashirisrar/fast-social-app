@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
 
-export default function PostComponent({ username, body, image, likeCount, commentCount }: any) {
+export default function PostComponent({ username, body, image, likeCount, commentCount, postId }: any) {
   return (
     <Card className="space-y-2 px-6 mb-4 w-[650px]">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -28,7 +28,7 @@ export default function PostComponent({ username, body, image, likeCount, commen
           <p className="text-sm text-muted-foreground">{body}
           </p>
           <div className="bg-red-500 w-full">
-            <Image width={400} style={{ objectFit: "contain" }} height={400} alt="imagenew" src={image} />
+            <Image width={400} style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
           </div>
         </div>
         <div className="flex gap-2">

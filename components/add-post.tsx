@@ -28,17 +28,6 @@ export function AddPost() {
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                            Title
-                        </Label>
-                        <Input
-                            id="name"
-                            placeholder="Enter title here"
-                            defaultValue=""
-                            className="col-span-3"
-                        />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="username" className="text-right">
                             Content
                         </Label>

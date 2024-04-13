@@ -1,9 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function Component() {
+export default function EventComponent() {
   return (
-    <Card>
+    <Card className="mb-4">
       <CardHeader>
         <CardTitle>Events</CardTitle>
       </CardHeader>

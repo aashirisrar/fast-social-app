@@ -15,13 +15,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -31,8 +24,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import Component from "@/components/events";
-import PostItem from "@/components/post-item";
+import EventComponent from "@/components/events";
+import PostComponent from "@/components/post-item";
 import { AddPost } from "@/components/add-post";
 
 export default function Dashboard() {
@@ -224,7 +217,7 @@ export default function Dashboard() {
             <AddPost />
           </div>
           <div
-            className="flex justify-between rounded-lg border border-dashed shadow-sm"
+            className="flex justify-between gap-4 rounded-lg border border-dashed shadow-sm"
             x-chunk="dashboard-02-chunk-1"
           >
             {/* <div className="flex flex-col items-center gap-1 text-center">
@@ -236,8 +229,15 @@ export default function Dashboard() {
               </p>
               <Button className="mt-4">Add Product</Button>
             </div> */}
-            <PostItem />
-            <Component />
+            <div className="flex flex-col">
+              <PostComponent />
+              <PostComponent />
+              <PostComponent />
+            </div>
+            <div>
+              <EventComponent />
+              <EventComponent />
+            </div>
           </div>
         </main>
       </div>

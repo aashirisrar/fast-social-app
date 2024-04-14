@@ -5,8 +5,10 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import LikeComponent from "@/components/like";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function PostComponent({ username, body, image, likeCount, commentCount, postId, createdAt }: any) {
+export default function PostComponent({ userId, body, image, likeCount, commentCount, postId, createdAt }: any) {
 
   function calculateTimeDifference(timeCreatedAt: Date | string | number): string {
     const postTime: Date = new Date(timeCreatedAt); // Convert to Date object
@@ -36,6 +38,22 @@ export default function PostComponent({ username, body, image, likeCount, commen
     }
   }
 
+  const [userName, setUserName] = useState('');
+
+  // get username of the user who posted the post
+  useEffect(() => {
+    async function fetchUserNames() {
+      try {
+        const response = await axios.post('/api/post/getusername', { userId: userId });
+        setUserName(response.data.user.name);
+      } catch (error) {
+        console.error('Error incrementing likes:', error);
+      }
+    }
+
+    fetchUserNames();
+  }, []);
+
 
   return (
     <Card className="space-y-2 px-6 mb-4 w-[650px]">
@@ -46,7 +64,7 @@ export default function PostComponent({ username, body, image, likeCount, commen
             <AvatarFallback>OM</AvatarFallback>
           </Avatar>
           <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">Aashir Israr{username}</p>
+            <p className="text-sm font-medium leading-none">{userName}</p>
             <p className="text-sm text-muted-foreground">
               {calculateTimeDifference(createdAt)}
             </p>

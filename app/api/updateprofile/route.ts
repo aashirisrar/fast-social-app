@@ -5,7 +5,7 @@ import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
     try {
-        const { userName, password, firstName, lastName, bio, dob, gender } = await req.json();
+        const { userName, password, firstName, lastName, bio, dob, gender, image } = await req.json();
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -30,6 +30,7 @@ export async function POST(req: Request) {
                 bio,
                 gender,
                 dateOfBirth: new Date(dob),
+                profilePicture: image,
             }
         })
 

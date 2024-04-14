@@ -19,6 +19,7 @@ import { useEffect, useState, useTransition } from "react";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import UploadBtn from "./upload-button";
 
 const formSchema = z.object({
     userName: z.string(),
@@ -28,6 +29,7 @@ const formSchema = z.object({
     bio: z.string(),
     dob: z.string(),
     gender: z.string(),
+    image: z.string(),
 });
 
 export function EditForm() {
@@ -46,8 +48,14 @@ export function EditForm() {
             bio: "",
             gender: "",
             dob: "1998-01-01",
+            image: "",
+
         },
     });
+
+    function setLink(link: string) {
+        form.setValue("image", link);
+    }
 
     useEffect(() => {
         async function fetchUserProfile() {
@@ -221,6 +229,24 @@ export function EditForm() {
                         </FormItem>
                     )}
                 />
+                <FormField
+                    control={form.control}
+                    name="image"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Image:</FormLabel>
+                            <FormControl>
+                                <Input
+                                    className="hidden"
+                                    type="text"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <UploadBtn returnedLink={setLink} />
 
                 <FormError message={error} />
                 <FormSuccess message={success} />
@@ -228,7 +254,6 @@ export function EditForm() {
                 <Button type="submit" className="w-full">
                     Update Profile
                 </Button>
-
             </form>
         </Form>
     );

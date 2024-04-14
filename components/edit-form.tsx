@@ -57,6 +57,10 @@ export function EditForm() {
         form.setValue("image", link);
     }
 
+    function setMessage(message: string) {
+        setSuccess(message);
+    }
+
     useEffect(() => {
         async function fetchUserProfile() {
             try {
@@ -246,8 +250,9 @@ export function EditForm() {
                         </FormItem>
                     )}
                 />
-                <UploadBtn returnedLink={setLink} />
-
+                <div className="ml-[4.5rem]">
+                    <UploadBtn message={setMessage} returnedLink={setLink} />
+                </div>
                 <FormError message={error} />
                 <FormSuccess message={success} />
 

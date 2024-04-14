@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button"
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { PlusCircleIcon } from "lucide-react"
-import { Textarea } from "./ui/textarea"
+import { Textarea } from "@/components/ui/textarea"
 import {
     Form,
     FormControl,
@@ -27,10 +27,9 @@ import {
 } from "@/components/ui/form";
 
 import axios from "axios";
-import UploadBtn from "./upload-button";
+import UploadBtn from "@/components/upload-button";
 import { useState } from "react";
-import { FormError } from "./form-error";
-import { FormSuccess } from "./form-success";
+import { FormSuccess } from "@/components/form-success";
 
 const formSchema = z.object({
     content: z.string(),
@@ -65,6 +64,10 @@ export function AddPost() {
 
     function setLink(link: string) {
         form.setValue("image", link);
+    }
+
+    function setMessage(message: string) {
+        setSuccess(message);
     }
 
     return (
@@ -119,9 +122,8 @@ export function AddPost() {
                                 )}
                             />
                             <div className="flex justify-center pb-2">
-                                <UploadBtn returnedLink={setLink} />
+                                <UploadBtn message={setMessage} returnedLink={setLink} />
                             </div>
-                            <FormError message={error} />
                             <FormSuccess message={success} />
                             <div className="flex justify-end">
                                 <Button type="submit">Create Post</Button>

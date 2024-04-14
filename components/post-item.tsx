@@ -39,6 +39,8 @@ export default function PostComponent({ userId, body, image, likeCount, commentC
   }
 
   const [userName, setUserName] = useState('');
+  const [imageSrc, setImageSrc] = useState('');
+  const [name, setName] = useState('');
 
   // get username of the user who posted the post
   useEffect(() => {
@@ -46,6 +48,9 @@ export default function PostComponent({ userId, body, image, likeCount, commentC
       try {
         const response = await axios.post('/api/post/getusername', { userId: userId });
         setUserName(response.data.user.name);
+        setImageSrc(response.data.user.profilePicture);
+        // for setting the fallback of avatar
+        setName(response.data.user.firstName[0] + response.data.user.lastName[0]);
       } catch (error) {
         console.error('Error incrementing likes:', error);
       }
@@ -60,8 +65,8 @@ export default function PostComponent({ userId, body, image, likeCount, commentC
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <div className="flex items-center gap-4">
           <Avatar className="hidden h-9 w-9 sm:flex">
-            <AvatarImage src="/avatars/01.png" alt="Avatar" />
-            <AvatarFallback>OM</AvatarFallback>
+            <AvatarImage src={imageSrc} alt={postId} />
+            <AvatarFallback>{name}</AvatarFallback>
           </Avatar>
           <div className="grid gap-1">
             <p className="text-sm font-medium leading-none">{userName}</p>

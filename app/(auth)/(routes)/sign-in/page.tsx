@@ -22,7 +22,7 @@ export default function Dashboard() {
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder="lXX-XXXX@lhr.nu.edu.pk"
                 required
               />
             </div>

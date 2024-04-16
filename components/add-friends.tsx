@@ -20,13 +20,15 @@ const AddFriendComponent = ({ firstName, lastName, name, profilePicture }: any) 
                     >
                         Add Friend
                     </Button>
-                    <Button className="w-full" variant="outline"
-                    >
-                        View Profile
-                    </Button>
+                    <Link href={"/user/" + name}>
+                        <Button className="w-full" variant="outline"
+                        >
+                            View Profile
+                        </Button>
+                    </Link>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

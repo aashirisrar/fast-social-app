@@ -4,13 +4,12 @@ import Link from "next/link";
 import {
     CircleUser,
     Home,
-    LineChart,
     Menu,
     Package,
     Package2,
     PanelTop,
     Search,
-    ShoppingCart,
+    Sparkles,
     Users,
 } from "lucide-react";
 
@@ -83,11 +82,11 @@ const NavbarDashboard = () => {
                             Friends
                         </Link>
                         <Link
-                            href="/trends"
+                            href="/discover"
                             className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                         >
-                            <LineChart className="h-5 w-5" />
-                            Trends
+                            <Sparkles className="h-5 w-5" />
+                            Discover
                         </Link>
                     </nav>
                     {/* <div className="mt-auto">

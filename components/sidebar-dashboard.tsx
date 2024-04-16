@@ -4,10 +4,10 @@ import Link from "next/link";
 import {
     Bell,
     Home,
-    LineChart,
     Package,
     Package2,
     PanelTop,
+    Sparkles,
     Users,
 } from "lucide-react";
 
@@ -38,9 +38,9 @@ const routes = [
         href: "/friends",
     },
     {
-        label: "Trends",
-        icon: LineChart,
-        href: "/trends",
+        label: "Discover",
+        icon: Sparkles,
+        href: "/discover",
     },
 ];
 

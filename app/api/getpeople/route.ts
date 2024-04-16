@@ -13,8 +13,22 @@ export async function POST(req: Request) {
             );
         }
 
+        // fetch the friends of the user
+        const friends = await prisma.following.findMany({
+            where: {
+                followerId: session.user?.id!
+            }
+        });
+
         const user = await prisma.user.findMany({
+            where: {
+                id: {
+                    notIn: friends.map(friend => friend.followingId)
+                }
+            }
         })
+
+        user.find((u) => u.id === session.user?.id) && user.splice(user.findIndex((u) => u.id === session.user?.id), 1);
 
         return NextResponse.json(
             { success: "Users Found!", people: user },

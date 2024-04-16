@@ -12,26 +12,25 @@ export async function POST(req: Request) {
                 { status: 200 }
             );
         }
+        const { username } = await req.json();
 
-        // fetch the friends of the user
-        const friends = await prisma.following.findMany({
+        // update the user's profile
+        const foundUser = await prisma.user.findUnique({
             where: {
-                followerId: session.user?.id!
-            }
-        });
-
-        const user = await prisma.user.findMany({
-            where: {
-                id: {
-                    notIn: friends.map(friend => friend.followingId)
-                }
-            }
+                name: username
+            },
         })
 
-        user.find((u) => u.id === session.user?.id) && user.splice(user.findIndex((u) => u.id === session.user?.id), 1);
+
+        // update the user's profile
+        const foundPosts = await prisma.post.findMany({
+            where: {
+                userId: foundUser?.id
+            },
+        })
 
         return NextResponse.json(
-            { success: "Users Found!", people: user },
+            { success: "Posts Found!", user: foundUser, posts: foundPosts },
             { status: 200 }
         );
     } catch (e) {

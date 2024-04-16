@@ -13,9 +13,41 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+
+const routes = [
+    {
+        label: "Dashboard",
+        icon: Home,
+        href: "/dashboard",
+    },
+    {
+        label: "Your Profile",
+        icon: PanelTop,
+        href: "/profile",
+    },
+    {
+        label: "Societies",
+        icon: Package,
+        href: "/societies",
+    },
+    {
+        label: "Friends",
+        icon: Users,
+        href: "/friends",
+    },
+    {
+        label: "Trends",
+        icon: LineChart,
+        href: "/trends",
+    },
+];
 
 
 const SidebarDashboard = () => {
+    const pathName = usePathname();
+
     return (
         <div className="flex h-full max-h-screen flex-col gap-2">
             <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
@@ -30,44 +62,21 @@ const SidebarDashboard = () => {
             </div>
             <div className="flex-1">
                 <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-                    <Link
-                        href="/dashboard"
-                        className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-                    >
-                        <Home className="h-4 w-4" />
-                        Home
-                    </Link>
-                    <Link
-                        href="/profile"
-                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                    >
-                        <PanelTop className="h-4 w-4" />
-                        Your Profile
-                        <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                            6
-                        </Badge>
-                    </Link>
-                    <Link
-                        href="/societies"
-                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                    >
-                        <Package className="h-4 w-4" />
-                        Societies
-                    </Link>
-                    <Link
-                        href="/friends"
-                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                    >
-                        <Users className="h-4 w-4" />
-                        Friends
-                    </Link>
-                    <Link
-                        href="/trends"
-                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                    >
-                        <LineChart className="h-4 w-4" />
-                        Trends
-                    </Link>
+                    {routes.map((route) => (
+                        <Link
+                            href={route.href}
+                            key={route.href}
+                            className={cn(
+                                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                                pathName === route.href
+                                    ? "bg-muted text-primary"
+                                    : "text-muted-foreground "
+                            )}
+                        >
+                            <route.icon className="h-4 w-4" />
+                            {route.label}
+                        </Link>))}
+
                 </nav>
             </div>
             {/* <div className="mt-auto p-4">

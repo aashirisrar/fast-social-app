@@ -1,6 +1,6 @@
 import { EditForm } from "@/components/edit-form";
 
-export default function Dashboard() {
+export default function SettingsPage() {
     return (
         <>
             <div className="flex items-center">

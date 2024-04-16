@@ -18,9 +18,9 @@ import { usePathname } from "next/navigation";
 
 const routes = [
     {
-        label: "Dashboard",
+        label: "Home",
         icon: Home,
-        href: "/dashboard",
+        href: "/home",
     },
     {
         label: "Your Profile",

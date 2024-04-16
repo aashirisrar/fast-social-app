@@ -6,7 +6,7 @@ import { AddPost } from "@/components/add-post";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function Dashboard() {
+export default function HomePage() {
 
   const [posts, setPosts] = useState([]);
 

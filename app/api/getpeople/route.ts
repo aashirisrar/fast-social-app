@@ -13,7 +13,6 @@ export async function POST(req: Request) {
             );
         }
 
-        // fetch the post of friends
         const user = await prisma.user.findMany({
         })
 

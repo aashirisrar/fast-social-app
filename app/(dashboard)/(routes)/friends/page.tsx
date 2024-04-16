@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import FriendComponent from "@/components/friend-component";
 
-export default function Profile() {
+export default function FriendsPage() {
     const [friends, setFriends] = useState([]);
 
     useEffect(() => {

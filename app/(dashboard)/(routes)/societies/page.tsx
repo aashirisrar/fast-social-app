@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AddFriendComponent from "@/components/add-friends";
 
-export default function DiscoverPage() {
+export default function SocietiesPage() {
     const [people, setPeople] = useState([]);
 
     useEffect(() => {

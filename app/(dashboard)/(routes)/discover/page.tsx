@@ -4,24 +4,23 @@ import EventComponent from "@/components/events";
 import { AddPost } from "@/components/add-post";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import FriendComponent from "@/components/friend-component";
 import AddFriendComponent from "@/components/add-friends";
 
 export default function Profile() {
-    const [friends, setFriends] = useState([]);
+    const [people, setPeople] = useState([]);
 
     useEffect(() => {
-        async function fetchFriends() {
+        async function fetchpeople() {
             try {
-                const response = await axios.post('/api/getfriends');
-                setFriends(response.data.friends);
+                const response = await axios.post('/api/getpeople');
+                setPeople(response.data.people);
 
             } catch (error) {
                 console.error('Error fetching user profile:', error);
             }
         }
 
-        fetchFriends();
+        fetchpeople();
     }, []);
 
 
@@ -47,7 +46,7 @@ export default function Profile() {
                 <div className="flex flex-col">
                     <div className="grid gap-6 grid-cols-5">
                         {
-                            friends.map((friend: any) => (
+                            people.map((friend: any) => (
                                 <AddFriendComponent key={friend.id} {...friend} />
                             ))
                         }

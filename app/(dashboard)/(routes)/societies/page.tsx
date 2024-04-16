@@ -27,7 +27,7 @@ export default function SocietiesPage() {
     return (
         <>
             <div className="flex items-center justify-between">
-                <h1 className="text-lg font-semibold md:text-2xl">Discover People</h1>
+                <h1 className="text-lg font-semibold md:text-2xl">Societies</h1>
                 <AddPost />
             </div>
             <div

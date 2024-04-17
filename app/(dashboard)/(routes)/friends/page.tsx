@@ -26,10 +26,10 @@ export default function FriendsPage() {
 
     return (
         <>
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
                 <h1 className="text-lg font-semibold md:text-2xl">Your Friends</h1>
                 <AddPost />
-            </div>
+            </div> */}
             <div
                 className="flex justify-between gap-4 rounded-lg border border-dashed shadow-sm"
                 x-chunk="dashboard-02-chunk-1"

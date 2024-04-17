@@ -1,101 +1,112 @@
 "use client"
-
-import Link from "next/link";
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Logo from "./logo.svg";
+import "./style.css";
 import {
-    Bell,
+    Heart,
     Home,
-    Package,
-    Package2,
-    PanelTop,
-    Sparkles,
-    Users,
-} from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+    MessageCircle,
+    PlusSquare,
+    LogOut as LogoutIcon // Rename LogOut to avoid conflict with imported component name
+  } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-const routes = [
-    {
-        label: "Home",
-        icon: Home,
-        href: "/home",
-    },
-    {
-        label: "Your Profile",
-        icon: PanelTop,
-        href: "/profile",
-    },
-    {
-        label: "Societies",
-        icon: Package,
-        href: "/societies",
-    },
-    {
-        label: "Friends",
-        icon: Users,
-        href: "/friends",
-    },
-    {
-        label: "Discover",
-        icon: Sparkles,
-        href: "/discover",
-    },
-];
-
+const NAVLINKS = [
+    {name:"Home", path:"/dashboard", icon: Home},
+    {name:"Messages", path:"/dashboard/messages", icon: MessageCircle},
+    {name: "Create", path: "/dashboard/create", icon: PlusSquare},
+    {name: "Friends", path: "/dashboard/friends", icon: PlusSquare, hideOnMobile: true},
+    {name: "Notifications", path: "/dashboard/notifications", icon: Heart, hideOnMobile: true},
+  ];
 
 const SidebarDashboard = () => {
-    const pathName = usePathname();
-
+    const [isHover, setIsHover] = useState(false);
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
+  
+    useEffect(() => {
+      const checkScreenSize = () => {
+        setIsSmallScreen(window.innerWidth < 768);
+      };
+  
+      checkScreenSize();
+  
+      window.addEventListener('resize', checkScreenSize);
+  
+      return () => window.removeEventListener('resize', checkScreenSize);
+    }, []);
     return (
-        <div className="flex h-full max-h-screen flex-col gap-2">
-            <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-                <Link href="/" className="flex items-center gap-2 font-semibold">
-                    <Package2 className="h-6 w-6" />
-                    <span className="">Connect Inc</span>
-                </Link>
-                <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-                    <Bell className="h-4 w-4" />
-                    <span className="sr-only">Toggle notifications</span>
-                </Button>
-            </div>
-            <div className="flex-1">
-                <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-                    {routes.map((route) => (
-                        <Link
-                            href={route.href}
-                            key={route.href}
-                            className={cn(
-                                "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
-                                pathName === route.href
-                                    ? "bg-muted text-primary"
-                                    : "text-muted-foreground "
-                            )}
-                        >
-                            <route.icon className="h-4 w-4" />
-                            {route.label}
-                        </Link>))}
 
-                </nav>
-            </div>
-            {/* <div className="mt-auto p-4">
-        <Card x-chunk="dashboard-02-chunk-0">
-          <CardHeader className="p-2 pt-0 md:p-4">
-            <CardTitle>Upgrade to Pro</CardTitle>
-            <CardDescription>
-              Unlock all features and get unlimited access to our support
-              team.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-            <Button size="sm" className="w-full">
-              Upgrade
-            </Button>
-          </CardContent>
-        </Card>
-      </div> */}
+        <>
+      {isSmallScreen ? (
+        <div className=''>
+          <nav className="lg:hidden md:hidden fixed bottom-0 left-0 right-0 bg-black">
+            <ul className="flex justify-between py-4 px-6 sm:px-12">
+              {NAVLINKS.map((it) => {
+                const LinkStar = it.icon;
+                return (
+                  <li key={it.name}>
+                    <a href={it.path} className="block">
+                      <span className="text-center">
+                        <LinkStar className="sm:w-16 sm:h-16" /> {/* Adjust icon size for small screens */}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </div>
+      ) : (
+        <aside className={`sidebar ${isHover ? "active" : ""}`}>
+          <div className="wrapper">
+            <div className="top__wrapper">
+              <div className="header">
+                <span className="header-logo">
+                  <Image 
+                    className='rounded-full bg-white'
+                    src={Logo}
+                    alt="img"
+                    width={45}
+                    height={45}
+                    layout="fixed"
+                  />
+                </span>
+                <div className="header-details">
+                  <span className="header-name hidden lg:inline">Fast App</span>
+                  <span className="header-email hidden lg:inline">Connects People</span>
+                </div>
+              </div>
+              <nav className="sidebar-nav hidden lg:inline md:inline">
+                <ul className="nav-menu">
+                  {NAVLINKS.map((item) => {
+                    const LinkIcon = item.icon;
+                    return (
+                      <li key={item.name} className="nav-menu__item">
+                        <a href={item.path} className="nav-menu__link">
+                          <span className="material-symbols-outlined md:hover:bg-slate-600 md:hover:p-3 md:hover:rounded-full transition duration-500">
+                            <LinkIcon />
+                          </span>
+                          <span className="text hidden lg:inline">{item.name}</span>
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+            </div>
+            <div className="footer">
+              <a href="/" className="nav-menu__link">
+                <span className="material-symbols-outlined footer-icon md:hover:bg-slate-600 md:hover:p-3 md:hover:rounded-full transition duration-500">
+                  <LogoutIcon className='hidden md:inline lg:inline' />
+                </span>
+                <span className="footer-text hidden lg:inline">Logout</span>
+              </a>
+            </div>
+          </div>
+        </aside>
+      )}
+    </>
     )
 }
 

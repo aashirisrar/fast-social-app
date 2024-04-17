@@ -62,39 +62,77 @@ export default function PostComponent({ userId, body, image, likeCount, commentC
 
 
   return (
-    <Card className="space-y-2 px-6 mb-4 w-[650px]">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <div className="flex items-center gap-4">
-          <Avatar className="hidden h-9 w-9 sm:flex">
+// space-y-2 px-6 mb-4 w-[650px]
+    <Card className="border rounded-lg mb-4">
+{/* flex flex-row items-center justify-between space-y-0 pb-2 */}
+      {/* <CardHeader className=""> */}
+        {/* flex items-center gap-4 */}
+        <div className="m-4">
+          {/* hidden h-9 w-9 sm:flex */}
+          {/* <Avatar className="hidden h-9 w-9 sm:flex">
             <AvatarImage src={imageSrc} alt={postId} />
             <AvatarFallback>{name}</AvatarFallback>
-          </Avatar>
-          <div className="grid gap-1">
+          </Avatar> */}
+          {/* grid gap-1 */}
+          
+
+
+
+
+
+          <div className='flex items-center gap-4 text-sm'>
+        <Avatar className="">
+        <AvatarImage src={imageSrc} alt={postId} />
+        <AvatarFallback>{name}</AvatarFallback>
+          </Avatar> 
+          <div>
             <Link href={"/user/" + userName}>
-              <p className="text-sm font-medium leading-none hover:underline">{userName}</p>
+              {/* text-sm font-medium leading-none hover:underline */}
+              <strong className="">{userName}</strong>
             </Link>
-            <p className="text-sm text-muted-foreground">
+            <p className="">
               {calculateTimeDifference(createdAt)}
             </p>
+           
+          </div>
+        
+      </div>
+
+
+
+
+          
+            
+            {/* text-sm text-muted-foreground */}
+            
+          
+        
+        {/* h-4 w-4 text-muted-foreground */}
+        <LucideMenu className="" />
+      {/* </CardHeader> */}
+
+      {/* <CardContent className="space-y-4"> */}
+      {/* flex flex-col items-start gap-4 */}
+        <div className="">
+          {/* text-sm text-muted-foreground */}
+          <div className="my-3">{body}
+          </div>
+          <div className="flex gap-2 justify-center rounded-md">
+          <Image width={400} className="rounded-md  hover:cursor-pointer w-1/3" style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
+          <Image width={400} className="rounded-md  hover:cursor-pointer w-1/3" style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
+          <Image width={400} className="rounded-md  hover:cursor-pointer w-1/3" style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
           </div>
         </div>
-        <LucideMenu className="h-4 w-4 text-muted-foreground" />
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="flex flex-col items-start gap-4">
-          <p className="text-sm text-muted-foreground">{body}
-          </p>
-          <div className="bg-red-500 w-full">
-            <Image width={400} className="w-full" style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
-          </div>
-        </div>
+
+
         <div className="flex gap-2">
           {/* add like count here */}
           <LikeComponent postId={postId} likeCount={likeCount} />
           {/* add comment count here */}
           <Button variant="outline"><MessageCircle size={16} className="mr-1" />{commentCount}</Button>
         </div>
-      </CardContent>
+      {/* </CardContent> */}
+      </div>
     </Card>
   );
 }

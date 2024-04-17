@@ -70,10 +70,10 @@ export function AddPost() {
         setSuccess(message);
     }
 
-    return (
+    return (<div className="relative">
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="default" className="gap-x-1"><PlusCircleIcon size={18} />  New Post</Button>
+                <Button className="gap-x-1 hover:text-slate-400 bg-slate-700 hover:bg-slate-800 text-slate-300 rounded-full w-[100%]"><PlusCircleIcon size={18} />Generate</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
@@ -133,5 +133,8 @@ export function AddPost() {
                 </div>
             </DialogContent>
         </Dialog>
+    </div>
+
+        
     )
 }

@@ -1,4 +1,4 @@
-import { LucideMenu, MessageCircle } from "lucide-react";
+import { LucideMenu, MessageCircle,Share2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -125,12 +125,16 @@ export default function PostComponent({ userId, body, image, likeCount, commentC
         </div>
 
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 mt-3">
           {/* add like count here */}
           <LikeComponent postId={postId} likeCount={likeCount} />
           {/* add comment count here */}
           <Button variant="outline"><MessageCircle size={16} className="mr-1" />{commentCount}</Button>
         </div>
+        <div className='flex justify-end -mt-8 hover:cursor-pointer gap-2'>
+              <Share2 />
+            <p>Share</p>
+          </div>
       {/* </CardContent> */}
       </div>
     </Card>

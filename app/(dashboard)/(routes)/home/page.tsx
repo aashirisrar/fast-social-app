@@ -30,7 +30,7 @@ export default function HomePage() {
       <div className="fixed top-5 right-72"><MainNavigationMenu /></div>
       
       <div
-        className="flex justify-between gap-4 rounded-lg border border-dashed shadow-sm"
+        className="flex justify-between gap-4 rounded-lg shadow-white"
         x-chunk="dashboard-02-chunk-1"
       >
       

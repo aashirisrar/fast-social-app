@@ -17,7 +17,7 @@ export async function POST(req: Request) {
         // update the user's profile
         const foundUser = await prisma.user.findUnique({
             where: {
-                id: session?.user?.id
+                email: session?.user?.email!
             },
 
         })

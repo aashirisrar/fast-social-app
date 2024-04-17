@@ -85,7 +85,7 @@ export default function PostComponent({ userId, body, image, likeCount, commentC
           <p className="text-sm text-muted-foreground">{body}
           </p>
           <div className="bg-red-500 w-full">
-            <Image width={400} style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
+            <Image width={400} className="w-full" style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
           </div>
         </div>
         <div className="flex gap-2">

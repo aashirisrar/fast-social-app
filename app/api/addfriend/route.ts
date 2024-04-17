@@ -24,17 +24,24 @@ export async function POST(req: Request) {
             }
         });
 
+        const currentUser = await prisma.user.findUnique({
+            where: {
+                email: session.user?.email!
+            }
+        })
+
+
         // add friend
         const addedFriend = await prisma.following.create({
             data: {
-                followerId: session.user?.id!,
+                followerId: currentUser?.id!,
                 followingId: user?.id!
             },
         })
 
         const incrementFollowingOfCurrentUser = await prisma.user.update({
             where: {
-                id: session.user?.id!
+                id: currentUser?.id!
             },
             data: {
                 followingCount: {

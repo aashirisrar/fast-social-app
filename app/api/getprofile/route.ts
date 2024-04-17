@@ -14,10 +14,16 @@ export async function POST(req: Request) {
             );
         }
 
+        const user = await prisma.user.findUnique({
+            where: {
+                email: session.user?.email!
+            }
+        })
+
         // update the user's profile
         const foundUser = await prisma.user.findUnique({
             where: {
-                email: session?.user?.email!
+                email: user?.email!
             },
 
         })

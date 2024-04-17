@@ -15,12 +15,19 @@ export async function POST(req: Request) {
             );
         }
 
+        const currentUser = await prisma.user.findUnique({
+            where: {
+                email: session.user?.email!
+            }
+        })
+
+
         // create the post
         const createdPost = await prisma.post.create({
             data: {
                 body: content,
                 image,
-                userId: session.user?.id!,
+                userId: currentUser?.id!,
             },
         })
 

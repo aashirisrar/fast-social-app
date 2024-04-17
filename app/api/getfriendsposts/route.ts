@@ -13,10 +13,17 @@ export async function POST(req: Request) {
             );
         }
 
+        const currentUser = await prisma.user.findUnique({
+            where: {
+                email: session.user?.email!
+            }
+        })
+
+
         // fetch the friends of the user
         const friends = await prisma.following.findMany({
             where: {
-                followerId: session.user?.id!
+                followerId: currentUser?.id!
             }
         });
 

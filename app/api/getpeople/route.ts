@@ -13,10 +13,16 @@ export async function POST(req: Request) {
             );
         }
 
+        const currentUser = await prisma.user.findUnique({
+            where: {
+                email: session.user?.email!
+            }
+        })
+
         // fetch the friends of the user
         const friends = await prisma.following.findMany({
             where: {
-                followerId: session.user?.id!
+                followerId: currentUser?.id!
             }
         });
 
@@ -28,7 +34,7 @@ export async function POST(req: Request) {
             }
         })
 
-        user.find((u) => u.id === session.user?.id) && user.splice(user.findIndex((u) => u.id === session.user?.id), 1);
+        user.find((u) => u.id === currentUser?.id) && user.splice(user.findIndex((u) => u.id === currentUser?.id), 1);
 
         return NextResponse.json(
             { success: "Users Found!", people: user },

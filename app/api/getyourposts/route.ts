@@ -13,10 +13,16 @@ export async function POST(req: Request) {
             );
         }
 
+        const user = await prisma.user.findUnique({
+            where: {
+                email: session.user?.email!
+            }
+        })
+
         // fetch your posts
         const fetchedPosts = await prisma.post.findMany({
             where: {
-                userId: session.user?.id!
+                userId: user?.id!
             }
         })
 

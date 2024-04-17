@@ -18,6 +18,7 @@ import axios from "axios";
 import { useState, useTransition } from "react";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     email: z.string(),
@@ -25,6 +26,7 @@ const formSchema = z.object({
 });
 
 export function SignInFormComponent() {
+    const router = useRouter()
     const [isPending, startTransition] = useTransition();
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -41,10 +43,14 @@ export function SignInFormComponent() {
         startTransition(async () => {
             try {
                 const resp = await axios.post("/api/signin", values);
-                // setError(resp.data.error);
-                // setSuccess(resp.data.success);
-            } catch (error) {
-                console.log(error);
+
+                router.push(resp.data.url);
+
+            } catch (error: any) {
+                if (error.response.status == 500) {
+                    setError("Invalid Credentials");
+                    return;
+                }
             }
         });
     }

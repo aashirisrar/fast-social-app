@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import EventComponent from "@/components/events";
 import PostComponent from "@/components/post-item";
@@ -7,17 +7,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function HomePage() {
-
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     async function fetchFriendsPost() {
       try {
-        const response = await axios.post('/api/getfriendsposts');
+        const response = await axios.post("/api/getfriendsposts");
         setPosts(response.data.posts);
-
       } catch (error) {
-        console.error('Error fetching user profile:', error);
+        console.error("Error fetching user profile:", error);
       }
     }
 
@@ -43,14 +41,17 @@ export default function HomePage() {
               </p>
               <Button className="mt-4">Add Product</Button>
             </div> */}
-        <div className="flex flex-col">
-          {
-            posts.map((post: any) => (
-              <PostComponent key={post.postId} {...post} />
-            ))
-          }
+
+        <div
+          className="flex flex-col"
+          style={{ marginLeft: "auto", marginRight: "auto" }}
+        >
+          {posts.map((post: any) => (
+            <PostComponent key={post.postId} {...post} />
+          ))}
         </div>
-        <div>
+
+        <div className="hidden lg:inline">
           <EventComponent />
           <EventComponent />
         </div>

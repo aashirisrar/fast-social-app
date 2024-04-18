@@ -47,7 +47,7 @@ export default function UserProfilePage() {
             </div> */}
                 <div className="flex flex-col">
                     {
-                        posts.map((post: any) => (
+                        posts?.map((post: any) => (
                             <PostComponent key={post.postId} {...post} />
                         ))
                     }

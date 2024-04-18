@@ -46,7 +46,7 @@ export default function SocietiesPage() {
                 <div className="flex flex-col">
                     <div className="grid gap-6 grid-cols-5">
                         {
-                            people.map((friend: any) => (
+                            people?.map((friend: any) => (
                                 <AddFriendComponent key={friend.id} {...friend} />
                             ))
                         }

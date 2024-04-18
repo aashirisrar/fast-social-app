@@ -27,7 +27,9 @@ model User {
   dateOfBirth    DateTime?
   followingCount Int       @default(0)
   followerCount  Int       @default(0)
-  profilePicture String?
+  profilePicture String?   @default("https://utfs.io/f/3b649a8a-5cfc-481d-ac4b-3fda846ee663-6tiuj6.png")
+
+  active Boolean @default(false)
 
   posts    Post[]
   comments Comments[]
@@ -35,30 +37,19 @@ model User {
   Followers Followers[]
   Following Following[]
 
-  accounts Account[]
-  Session  Session[]
-  Event    Event[]
+  Session       Session[]
+  Event         Event[]
+  ActivateToken ActivateToken[]
 }
 
-model Account {
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
+model ActivateToken {
+  id          Int       @id @default(autoincrement())
+  token       String    @unique
+  createdAt   DateTime  @default(now())
+  activatedAt DateTime?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([provider, providerAccountId])
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Session {
@@ -88,7 +79,7 @@ model Post {
   createdAt    DateTime @default(now())
 
   userId String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   comments Comments[]
 }
@@ -100,10 +91,10 @@ model Comments {
   likeCount Int      @default(0)
 
   userId String
-  User   User   @relation(fields: [userId], references: [id])
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   postId String
-  Post   Post?  @relation(fields: [postId], references: [postId])
+  Post   Post?  @relation(fields: [postId], references: [postId], onDelete: Cascade)
 }
 
 model Followers {
@@ -113,7 +104,7 @@ model Followers {
   followingId String
 
   followerId String
-  follower   User   @relation(fields: [followerId], references: [id])
+  follower   User   @relation(fields: [followerId], references: [id], onDelete: Cascade)
 }
 
 model Following {
@@ -123,7 +114,7 @@ model Following {
   followerId String
 
   followingId String
-  following   User   @relation(fields: [followingId], references: [id])
+  following   User   @relation(fields: [followingId], references: [id], onDelete: Cascade)
 }
 
 model Event {
@@ -138,5 +129,5 @@ model Event {
   createdAt DateTime  @default(now())
 
   userId String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

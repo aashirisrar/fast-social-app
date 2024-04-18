@@ -15,14 +15,15 @@ const transporter = nodemailer.createTransport({
 
 //Asynchronous function
 export const sendEmail = async (options: { to: string[]; subject: string; text: string }) => {
+    console.log("Sending Email");
     const mailOptions = {
-
         from: process.env.SMTP_FROM, //'User Name to show in email <User_email>' 
-        to: options.to.join(', '), // Creating list of receipents
+        to: options.to, // Creating list of receipents
         subject: options.subject,
         text: options.text,
     };
     try {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
         await transporter.sendMail(mailOptions);
         console.log("Success");
     }

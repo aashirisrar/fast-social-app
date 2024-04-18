@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { SignIn } from "@/components/sign-up";
+import { SignUpForm } from "@/components/sign-up";
 
 
 export default function LoginForm() {
@@ -18,7 +18,7 @@ export default function LoginForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <SignIn />
+        <SignUpForm />
       </CardContent>
     </Card>
   );

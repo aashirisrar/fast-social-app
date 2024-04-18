@@ -114,6 +114,7 @@ export function EditForm() {
                                     type="text"
                                     placeholder="e.g Max"
                                     {...field}
+                                    required
                                 />
                             </FormControl>
                             <FormMessage />
@@ -131,6 +132,7 @@ export function EditForm() {
                                     disabled={isPending}
                                     type="text"
                                     placeholder="e.g Robinson"
+                                    required
                                     {...field}
                                 />
                             </FormControl>
@@ -149,6 +151,7 @@ export function EditForm() {
                                     disabled={isPending}
                                     type="text"
                                     placeholder="e.g aashir_israr"
+                                    required
                                     {...field}
                                 />
                             </FormControl>
@@ -167,6 +170,7 @@ export function EditForm() {
                                     disabled={isPending}
                                     type="text"
                                     placeholder="e.g 123456"
+                                    required
                                     {...field}
                                 />
                             </FormControl>
@@ -185,6 +189,7 @@ export function EditForm() {
                                     disabled={isPending}
                                     type="date"
                                     placeholder="e.g 123456"
+                                    required
                                     {...field}
                                 />
                             </FormControl>

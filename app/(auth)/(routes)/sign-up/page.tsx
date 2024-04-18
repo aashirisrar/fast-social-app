@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Textarea } from "@nextui-org/react";
 import { Button } from "@/components/ui/button";

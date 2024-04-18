@@ -15,6 +15,7 @@ model User {
   name          String?   @unique
   email         String    @unique
   emailVerified DateTime?
+  password      String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -36,6 +37,7 @@ model User {
 
   accounts Account[]
   Session  Session[]
+  Event    Event[]
 }
 
 model Account {
@@ -122,4 +124,19 @@ model Following {
 
   followingId String
   following   User   @relation(fields: [followingId], references: [id])
+}
+
+model Event {
+  id        String    @id @unique @default(cuid())
+  name      String?
+  location  String?
+  date      DateTime?
+  startTime DateTime?
+  endTime   DateTime?
+  image     String?
+  details   String?
+  createdAt DateTime  @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 }

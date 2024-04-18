@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcryptjs from "bcrypt";
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     try {
         const { userName, password, firstName, lastName, bio, dob, gender, image } = await req.json();
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcryptjs.hash(password, 10);
 
         const session = await auth();
 
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
         // update the user's profile
         const updatedUser = await prisma.user.update({
             where: {
-                id: session?.user?.id
+                email: session?.user?.email!
             },
             data: {
                 name: userName,
@@ -31,6 +31,7 @@ export async function POST(req: Request) {
                 gender,
                 dateOfBirth: new Date(dob),
                 profilePicture: image,
+                password: hashedPassword
             }
         })
 

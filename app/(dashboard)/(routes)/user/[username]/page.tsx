@@ -6,17 +6,24 @@ import { AddPost } from "@/components/add-post";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
+import UserProfileComponent from "@/components/user-profile";
 
 export default function UserProfilePage() {
     const [posts, setPosts] = useState([]);
-    const [user, setUser] = useState({});
+    const [currUser, setCurruser] = useState({});
     const params = useParams();
 
     async function fetchUserPosts() {
         try {
             const response = await axios.post('/api/post/getuserposts', { username: params.username });
             setPosts(response.data.posts);
-            setUser(response.data.user);
+
+            // set dateofbirth to a readable format
+            const date = new Date(response.data.user.dateOfBirth);
+            const formattedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+            response.data.user.dateOfBirth = formattedDate;
+
+            setCurruser(response.data.user);
         } catch (error) {
             console.error('Error fetching posts:', error);
         }
@@ -53,8 +60,7 @@ export default function UserProfilePage() {
                     }
                 </div>
                 <div>
-                    <EventComponent />
-                    <EventComponent />
+                    <UserProfileComponent user={currUser} />
                 </div>
             </div>
         </>

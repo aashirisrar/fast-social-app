@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import LikeComponent from "@/components/like";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 export default function PostComponent({ userId, body, image, likeCount, commentCount, postId, createdAt }: any) {
 
@@ -69,7 +70,9 @@ export default function PostComponent({ userId, body, image, likeCount, commentC
             <AvatarFallback>{name}</AvatarFallback>
           </Avatar>
           <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">{userName}</p>
+            <Link href={"/user/" + userName}>
+              <p className="text-sm font-medium leading-none hover:underline">{userName}</p>
+            </Link>
             <p className="text-sm text-muted-foreground">
               {calculateTimeDifference(createdAt)}
             </p>

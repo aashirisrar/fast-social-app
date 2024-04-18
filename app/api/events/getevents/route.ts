@@ -13,21 +13,12 @@ export async function POST(req: Request) {
             );
         }
 
-        const user = await prisma.user.findUnique({
-            where: {
-                email: session.user?.email!
-            }
-        })
-
-        // fetch your posts
-        const fetchedPosts = await prisma.post.findMany({
-            where: {
-                userId: user?.id!
-            }
+        // fetch the events
+        const fetchedEvents = await prisma.event.findMany({
         })
 
         return NextResponse.json(
-            { success: "Posts Found!", posts: fetchedPosts },
+            { success: "Events Found!", events: fetchedEvents },
             { status: 200 }
         );
     } catch (e) {

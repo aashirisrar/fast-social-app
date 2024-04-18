@@ -23,7 +23,6 @@ import UploadBtn from "./upload-button";
 
 const formSchema = z.object({
     userName: z.string(),
-    password: z.string(),
     firstName: z.string(),
     lastName: z.string(),
     bio: z.string(),
@@ -42,14 +41,12 @@ export function EditForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             userName: "",
-            password: "",
             firstName: "",
             lastName: "",
             bio: "",
             gender: "",
             dob: "1998-01-01",
             image: "",
-
         },
     });
 
@@ -76,7 +73,7 @@ export function EditForm() {
                 form.setValue('bio', userData.bio || '');
                 form.setValue('dob', dateOfBir || '1998-01-01');
                 form.setValue('gender', userData.gender || '');
-
+                form.setValue('image', userData.profilePicture || '');
                 // Set placeholder for gender
                 setGenderplaceholder(userData.gender || "Select a gender");
 
@@ -212,24 +209,6 @@ export function EditForm() {
                                     <SelectItem value="Female">Female</SelectItem>
                                 </SelectContent>
                             </Select>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Password:</FormLabel>
-                            <FormControl>
-                                <Input
-                                    disabled={isPending}
-                                    type="password"
-                                    placeholder="e.g 123456"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
                         </FormItem>
                     )}
                 />

@@ -27,7 +27,9 @@ model User {
   dateOfBirth    DateTime?
   followingCount Int       @default(0)
   followerCount  Int       @default(0)
-  profilePicture String?
+  profilePicture String?   @default("https://utfs.io/f/3b649a8a-5cfc-481d-ac4b-3fda846ee663-6tiuj6.png")
+
+  active Boolean @default(false)
 
   posts    Post[]
   comments Comments[]
@@ -35,30 +37,19 @@ model User {
   Followers Followers[]
   Following Following[]
 
-  accounts Account[]
-  Session  Session[]
-  Event    Event[]
+  Session       Session[]
+  Event         Event[]
+  ActivateToken ActivateToken[]
 }
 
-model Account {
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
+model ActivateToken {
+  id          Int       @id @default(autoincrement())
+  token       String    @unique
+  createdAt   DateTime  @default(now())
+  activatedAt DateTime?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([provider, providerAccountId])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model Session {

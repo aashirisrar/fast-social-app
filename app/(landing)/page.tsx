@@ -1,19 +1,26 @@
-import { MainNavigationMenu } from "@/components/navbar";
-import Hero from "@/components/hero";
-import { InputForm } from "@/components/form";
-import { SignIn } from "@/components/sign-up";
-
-export default function Home() {
+import React from 'react'
+import {Cta,Navbar,Brand} from '@/components/index'
+import { Footer,Blog,Header,Possibility,Whatgpt3,Features } from '@/components/Landingcomps/index'
+ import './App.css'
+const Home = () => {
   return (
-    <div className="relative flex min-h-screen flex-col bg-background">
-      <MainNavigationMenu />
-      <main className="flex-1">
-        <div className="container relative">
-          <Hero />
-          <InputForm />
-          <SignIn />
-        </div>
-      </main>
+    
+    <div className='App'>
+       <div className='gradient__bg'>
+       <Navbar />
+       <Header />
+      
+       </div>
+       <Brand />
+       <Whatgpt3 />
+       <Features />
+       <Possibility />
+       <Cta />
+       <Blog />
+       <Footer />
     </div>
-  );
+  )
 }
+
+export default Home
+

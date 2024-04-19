@@ -87,8 +87,8 @@ export default function PostComponent({ userId, body, image, likeCount, commentC
           </Avatar> 
           <div>
             <Link href={"/user/" + userName}>
-              {/* text-sm font-medium leading-none hover:underline */}
-              <strong className="">{userName}</strong>
+              {/*  */}
+              <p className="text-sm font-medium leading-none hover:underline">{userName}</p>
             </Link>
             <p className="">
               {calculateTimeDifference(createdAt)}
@@ -118,10 +118,8 @@ export default function PostComponent({ userId, body, image, likeCount, commentC
           <div className="my-3">{body}
           </div>
           <div className="flex gap-2 justify-center rounded-md">
-          <Image width={400} className="rounded-md  hover:cursor-pointer w-1/3" style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
-          <Image width={400} className="rounded-md  hover:cursor-pointer w-1/3" style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
-          <Image width={400} className="rounded-md  hover:cursor-pointer w-1/3" style={{ objectFit: "contain" }} height={400} alt={postId} src={image} />
-          </div>
+          <Image width={400} className="rounded-md  hover:cursor-pointer w-full" style={{ objectFit: "cover" }} height={400} alt={postId} src={image} />
+           </div>
         </div>
 
 

@@ -5,19 +5,19 @@ import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
     try {
-        const session = await auth();
+        // const session = await auth();
 
-        if (!session) {
-            return NextResponse.json(
-                { error: "Not Authenticated!" },
-                { status: 200 }
-            );
-        }
+        // if (!session) {
+        //     return NextResponse.json(
+        //         { error: "Not Authenticated!" },
+        //         { status: 200 }
+        //     );
+        // }
 
         // update the user's profile
         const foundUser = await prisma.user.findUnique({
             where: {
-                id: session?.user?.id
+                email: "aashirisrar968@gmail.com"
             },
 
         })

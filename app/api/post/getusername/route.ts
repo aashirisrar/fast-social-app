@@ -4,21 +4,21 @@ import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
     try {
-        const session = await auth();
+        // const session = await auth();
 
-        if (!session) {
-            return NextResponse.json(
-                { error: "Not Authenticated!" },
-                { status: 200 }
-            );
-        }
+        // if (!session) {
+        //     return NextResponse.json(
+        //         { error: "Not Authenticated!" },
+        //         { status: 200 }
+        //     );
+        // }
 
         const { userId } = await req.json();
 
         // fetch the post of friends
         const user = await prisma.user.findUnique({
             where: {
-                id: userId
+                email: "aashirisrar968@gmail.com"
             },
         })
 

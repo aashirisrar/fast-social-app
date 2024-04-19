@@ -15,6 +15,7 @@ const Home = () => {
        <Whatgpt3 />
        <Features />
        <Possibility />
+       
        <Cta />
        <Blog />
        <Footer />

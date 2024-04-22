@@ -92,3 +92,9 @@
     position: relative;
   }
 }
+@media (max-width: 767.5px) {
+  .cen {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

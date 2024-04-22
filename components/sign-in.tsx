@@ -3,15 +3,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
@@ -19,90 +19,121 @@ import { useState, useTransition } from "react";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const formSchema = z.object({
-    email: z.string(),
-    password: z.string(),
+  email: z.string(),
+  password: z.string(),
 });
 
 export function SignInFormComponent() {
-    const router = useRouter()
-    const [isPending, startTransition] = useTransition();
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            email: "",
-            password: "",
-        },
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    startTransition(async () => {
+      try {
+        const resp = await axios.post("/api/signin", values);
+
+        router.push(resp.data.url);
+      } catch (error: any) {
+        if (error.response.status == 500) {
+          setError("Invalid Credentials");
+          return;
+        }
+      }
     });
+  }
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        startTransition(async () => {
-            try {
-                const resp = await axios.post("/api/signin", values);
-
-                router.push(resp.data.url);
-
-            } catch (error: any) {
-                if (error.response.status == 500) {
-                    setError("Invalid Credentials");
-                    return;
-                }
-            }
-        });
-    }
-
-    return (
-        <Form {...form}>
+  return (
+    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+      <div className="flex items-center justify-center py-12">
+        <div className="mx-auto grid w-[350px] gap-6">
+          <div className="grid gap-2 text-center">
+            <h1 className="text-3xl font-bold">FAST-SOCIALS</h1>
+            <p className="text-balance text-muted-foreground">
+              Login an account
+            </p>
+          </div>
+          <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
+              <div className="grid gap-4">
+                <div className="grid gap-2">
+                  <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Email:</FormLabel>
-                            <FormControl>
-                                <Input
-                                    disabled={isPending}
-                                    type="text"
-                                    placeholder="lXXXXXX@lhr.nu.edu.pk"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
+                      <FormItem>
+                        <FormLabel>Email:</FormLabel>
+                        <FormControl>
+                          <Input
+                            disabled={isPending}
+                            type="text"
+                            placeholder="lXXXXXX@lhr.nu.edu.pk"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
                     )}
-                />
-
-                <FormField
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <FormField
                     control={form.control}
                     name="password"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Password:</FormLabel>
-                            <FormControl>
-                                <Input
-                                    disabled={isPending}
-                                    type="password"
-                                    placeholder="e.g 123456"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
+                      <FormItem>
+                        <FormLabel>Password:</FormLabel>
+                        <FormControl>
+                          <Input
+                            disabled={isPending}
+                            type="password"
+                            placeholder="e.g 123456"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
                     )}
-                />
-
+                  />
+                </div>
                 <FormError message={error} />
                 <FormSuccess message={success} />
 
-                <Button type="submit" className="w-full">
-                    Sign In
+                <Button type="submit" className="w-full mt-10">
+                  Login
                 </Button>
+                <div className="text-center text-sm ">
+                  Don&apos;t have an account?{" "}
+                  <Link href="/sign-up" className="underline">
+                    Sign up
+                  </Link>
+                </div>
+              </div>
             </form>
-        </Form>
-    );
+          </Form>
+        </div>
+      </div>
+      <div className="hidden bg-muted lg:block">
+        <Image
+          src="/placeholder.svg"
+          alt="Image"
+          width="1920"
+          height="1080"
+          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+        />
+      </div>
+    </div>
+  );
 }

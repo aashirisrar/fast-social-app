@@ -20,6 +20,7 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Box } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string(),
@@ -60,9 +61,9 @@ export function SignInFormComponent() {
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">FAST-SOCIALS</h1>
+            <h1 className="text-3xl font-bold">Connect Inc</h1>
             <p className="text-balance text-muted-foreground">
-              Login an account
+              Login to your account
             </p>
           </div>
           <Form {...form}>
@@ -81,6 +82,7 @@ export function SignInFormComponent() {
                             type="text"
                             placeholder="lXXXXXX@lhr.nu.edu.pk"
                             {...field}
+                            required
                           />
                         </FormControl>
                         <FormMessage />
@@ -101,6 +103,7 @@ export function SignInFormComponent() {
                             type="password"
                             placeholder="e.g 123456"
                             {...field}
+                            required
                           />
                         </FormControl>
                         <FormMessage />
@@ -125,9 +128,9 @@ export function SignInFormComponent() {
           </Form>
         </div>
       </div>
-      <div className="hidden bg-muted lg:block">
+      <div className="hidden bg-muted lg:block h-[990px]">
         <Image
-          src="/placeholder.svg"
+          src="/signin.jpg"
           alt="Image"
           width="1920"
           height="1080"

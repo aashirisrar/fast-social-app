@@ -5,6 +5,7 @@ import PostComponent from "@/components/post-item";
 import { AddPost } from "@/components/add-post";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { CreateEvent } from "@/components/create-event";
 
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
@@ -27,6 +28,7 @@ export default function HomePage() {
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">Feed</h1>
         <AddPost />
+        <CreateEvent />
       </div>
       <div
         className="flex justify-between gap-4 rounded-lg shadow-sm"

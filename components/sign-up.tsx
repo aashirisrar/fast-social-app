@@ -86,6 +86,7 @@ export function SignUpForm() {
                         type="text"
                         placeholder="e.g Max"
                         {...field}
+                        required
                       />
                     </FormControl>
                     <FormMessage />
@@ -106,6 +107,7 @@ export function SignUpForm() {
                         type="text"
                         placeholder="e.g Robinson"
                         {...field}
+                        required
                       />
                     </FormControl>
                     <FormMessage />
@@ -126,6 +128,7 @@ export function SignUpForm() {
                     type="text"
                     placeholder="e.g aashir_israr"
                     {...field}
+                    required
                   />
                 </FormControl>
                 <FormMessage />
@@ -144,6 +147,7 @@ export function SignUpForm() {
                     type="text"
                     placeholder="e.g 123456"
                     {...field}
+                    required
                   />
                 </FormControl>
                 <FormMessage />
@@ -164,6 +168,7 @@ export function SignUpForm() {
                         type="date"
                         placeholder="e.g 123456"
                         {...field}
+                        required
                       />
                     </FormControl>
                     <FormMessage />
@@ -210,6 +215,7 @@ export function SignUpForm() {
                       type="text"
                       placeholder="e.g lXXXXXX@lhr.nu.edu.pk"
                       {...field}
+                      required
                     />
                   </FormControl>
                   <FormMessage />
@@ -230,6 +236,7 @@ export function SignUpForm() {
                       type="password"
                       placeholder="e.g 123456"
                       {...field}
+                      required
                     />
                   </FormControl>
                   <FormMessage />

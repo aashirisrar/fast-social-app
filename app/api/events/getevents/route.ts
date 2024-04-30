@@ -13,10 +13,33 @@ export async function POST(req: Request) {
             );
         }
 
+        type EventWithUserImage = {
+            id: string;
+            name: string | null;
+            location: string | null;
+            date: Date | null;
+            startTime: Date | null;
+            endTime: Date | null;
+            image: string | null;
+            details: string | null;
+            createdAt: Date;
+            userId: string;
+            userImage?: string;
+        };
+        
         // fetch the events
-        const fetchedEvents = await prisma.event.findMany({
-        })
-
+        const fetchedEvents = await prisma.event.findMany({}) as EventWithUserImage[];
+        
+        // fetch the user images of each event
+        for (let i = 0; i < fetchedEvents.length; i++) {
+            const user = await prisma.user.findUnique({
+                where: {
+                    id: fetchedEvents[i].userId,
+                },
+            });
+            fetchedEvents[i].userImage = user?.profilePicture!;
+        }
+        
         return NextResponse.json(
             { success: "Events Found!", events: fetchedEvents },
             { status: 200 }

@@ -38,7 +38,7 @@ export default function EventComponent() {
             <CardContent key={index} className="grid gap-8">
               <div className="flex items-center gap-4">
                 <Avatar className="hidden h-9 w-9 sm:flex">
-                  <AvatarImage src={event.image} alt="Avatar" />
+                  <AvatarImage src={event.userImage} alt="Avatar" />
                   <AvatarFallback>OM</AvatarFallback>
                 </Avatar>
                 <div className="grid gap-1">

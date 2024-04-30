@@ -3,14 +3,9 @@
 import Link from "next/link";
 import {
     CircleUser,
-    Home,
     Menu,
-    Package,
     Package2,
-    PanelTop,
     Search,
-    Sparkles,
-    Users,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";

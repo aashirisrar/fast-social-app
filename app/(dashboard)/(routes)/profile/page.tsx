@@ -31,7 +31,7 @@ export default function ProfilePage() {
                 <AddPost />
             </div>
             <div
-                className="flex justify-between gap-4 rounded-lg border border-dashed shadow-sm"
+                className="flex justify-between gap-4 rounded-lg shadow-sm"
                 x-chunk="dashboard-02-chunk-1"
             >
                 {/* <div className="flex flex-col items-center gap-1 text-center">
@@ -50,7 +50,7 @@ export default function ProfilePage() {
                         ))
                     }
                 </div>
-                <div>
+                <div className="hidden lg:inline">
                     <EventComponent />
                     <EventComponent />
                 </div>

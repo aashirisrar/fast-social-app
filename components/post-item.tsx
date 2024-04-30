@@ -74,7 +74,7 @@ export default function PostComponent({
   }, []);
 
   return (
-    <Card className="space-y-2 px-6 mb-4 w-[650px]">
+    <Card className="space-y-2 px-6 mb-4 w-[80%] mx-auto">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <div className="flex items-center gap-4">
           <Avatar className="hidden h-9 w-9 sm:flex">

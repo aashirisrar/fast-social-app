@@ -5,6 +5,7 @@ import PostComponent from "@/components/post-item";
 import { AddPost } from "@/components/add-post";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { CreateEvent } from "@/components/create-event";
 
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
@@ -27,9 +28,10 @@ export default function HomePage() {
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">Feed</h1>
         <AddPost />
+        <CreateEvent />
       </div>
       <div
-        className="flex justify-between gap-4 rounded-lg border border-dashed shadow-sm"
+        className="flex justify-between gap-4 rounded-lg shadow-sm"
         x-chunk="dashboard-02-chunk-1"
       >
         {/* <div className="flex flex-col items-center gap-1 text-center">
@@ -42,10 +44,7 @@ export default function HomePage() {
               <Button className="mt-4">Add Product</Button>
             </div> */}
 
-        <div
-          className="flex flex-col"
-          style={{ marginLeft: "auto", marginRight: "auto" }}
-        >
+        <div className="flex flex-col ">
           {posts.map((post: any) => (
             <PostComponent key={post.postId} {...post} />
           ))}

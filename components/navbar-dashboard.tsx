@@ -28,9 +28,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { routes } from "./sidebar-dashboard";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 
 const NavbarDashboard = () => {
+    const pathName = usePathname();
     const [profilepicture, setProfilePicture] = useState();
 
     useEffect(() => {
@@ -64,50 +68,27 @@ const NavbarDashboard = () => {
                 <SheetContent side="left" className="flex flex-col">
                     <nav className="grid gap-2 text-lg font-medium">
                         <Link
-                            href="#"
-                            className="flex items-center gap-2 text-lg font-semibold"
+                            href="/"
+                            className="flex items-center gap-2 text-lg font-semibold mb-2"
                         >
                             <Package2 className="h-6 w-6" />
                             <span className="sr-only">Connect Inc</span>
                         </Link>
-                        <Link
-                            href="/home"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <Home className="h-5 w-5" />
-                            Home
-                        </Link>
-                        <Link
-                            href="/profile"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-                        >
-                            <PanelTop className="h-5 w-5" />
-                            Your Profile
-                            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                                6
-                            </Badge>
-                        </Link>
-                        <Link
-                            href="/societies"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <Package className="h-5 w-5" />
-                            Societies
-                        </Link>
-                        <Link
-                            href="/friends"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <Users className="h-5 w-5" />
-                            Friends
-                        </Link>
-                        <Link
-                            href="/discover"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <Sparkles className="h-5 w-5" />
-                            Discover
-                        </Link>
+                        {routes.map((route) => (
+                            <Link
+                                href={route.href}
+                                key={route.href}
+                                className={cn(
+                                    "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground",
+                                    pathName === route.href
+                                        ? "bg-muted text-primary"
+                                        : "text-muted-foreground "
+                                )}
+                            >
+                                <route.icon className="h-4 w-4" />
+                                {route.label}
+                            </Link>))}
+
                     </nav>
                     {/* <div className="mt-auto">
                 <Card>

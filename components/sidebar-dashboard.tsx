@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-const routes = [
+export const routes = [
     {
         label: "Home",
         icon: Home,

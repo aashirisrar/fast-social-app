@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import axios from "axios";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function EventComponent() {
@@ -36,9 +37,10 @@ export default function EventComponent() {
         events?.map((event: any, index: any) => {
           return (
             <CardContent key={index} className="grid gap-8">
-              <div className="flex items-center gap-4">
+               <Link href={"/event/" + event.id}>
+              <div className="flex items-center gap-4 hover:bg-primary-foreground rounded py-2 px-3">
                 <Avatar className="hidden h-9 w-9 sm:flex">
-                  <AvatarImage src={event.image} alt="Avatar" />
+                  <AvatarImage src={event.userImage} alt="Avatar" />
                   <AvatarFallback>OM</AvatarFallback>
                 </Avatar>
                 <div className="grid gap-1">
@@ -49,6 +51,7 @@ export default function EventComponent() {
                 </div>
                 <div className="ml-auto font-medium">{event.startTime}</div>
               </div>
+              </Link>
             </CardContent>
           );
         })

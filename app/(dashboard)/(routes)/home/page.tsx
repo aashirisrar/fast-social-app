@@ -9,17 +9,28 @@ import { CreateEvent } from "@/components/create-event";
 
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
+  const [society, setSociety] = useState(false);
+
+  async function fetchFriendsPost() {
+    try {
+      const response = await axios.post("/api/getfriendsposts");
+      setPosts(response.data.posts);
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
+  }
+
+  async function fetchUserProfile() {
+    try {
+      const response = await axios.post("/api/getprofile");
+      setSociety(response.data.user.isSociety);
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
+  }
 
   useEffect(() => {
-    async function fetchFriendsPost() {
-      try {
-        const response = await axios.post("/api/getfriendsposts");
-        setPosts(response.data.posts);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    }
-
+    fetchUserProfile();
     fetchFriendsPost();
   }, []);
 
@@ -28,7 +39,7 @@ export default function HomePage() {
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">Feed</h1>
         <AddPost />
-        <CreateEvent />
+        {society && <CreateEvent />}
       </div>
       <div
         className="flex justify-between gap-4 rounded-lg shadow-sm"

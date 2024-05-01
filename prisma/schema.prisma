@@ -28,6 +28,7 @@ model User {
   followingCount Int       @default(0)
   followerCount  Int       @default(0)
   profilePicture String?   @default("https://utfs.io/f/3b649a8a-5cfc-481d-ac4b-3fda846ee663-6tiuj6.png")
+  isSociety      Boolean   @default(false)
 
   active Boolean @default(false)
 
@@ -60,14 +61,6 @@ model Session {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
-
-  @@id([identifier, token])
 }
 
 model Post {

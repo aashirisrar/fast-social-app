@@ -1,0 +1,10 @@
+
+p{
+    font-size: 14px;
+    line-height: 15px;
+    font-family: var(--font-family);
+    color: #fff;
+
+    margin: 1rem 0;
+    cursor: pointer;
+}

@@ -12,7 +12,7 @@ export default function FriendsPage() {
     useEffect(() => {
         async function fetchFriends() {
             try {
-                const response = await axios.post('/api/getfriends');
+                const response = await axios.post('/api/friends/getfriends');
                 setFriends(response.data.friends);
 
             } catch (error) {

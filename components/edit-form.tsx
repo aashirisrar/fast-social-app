@@ -67,7 +67,7 @@ export function EditForm() {
   useEffect(() => {
     async function fetchUserProfile() {
       try {
-        const response = await axios.post("/api/getprofile");
+        const response = await axios.post("/api/profile/getprofile");
         const userData = response.data.user;
 
         const dateOfBir = userData.dateOfBirth.split("T")[0];
@@ -95,7 +95,7 @@ export function EditForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
       try {
-        const resp = await axios.post("api/updateprofile", values);
+        const resp = await axios.post("api/profile/updateprofile", values);
         setError(resp.data.error);
         setSuccess(resp.data.success);
       } catch (error) {

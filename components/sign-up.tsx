@@ -59,7 +59,7 @@ export function SignUpForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
       try {
-        const resp = await axios.post("api/createprofile", values);
+        const resp = await axios.post("api/profile/createprofile", values);
         setError(resp.data.error);
         setSuccess(resp.data.success);
       } catch (error) {

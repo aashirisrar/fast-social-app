@@ -10,7 +10,7 @@ const AddFriendComponent = ({ firstName, lastName, name, profilePicture }: any) 
 
     const addFriend = async () => {
         try {
-            const response = await axios.post('/api/addfriend', { username: name });
+            const response = await axios.post('/api/friends/addfriend', { username: name });
             setIsFriendAdded(true);
         }
         catch (e) {

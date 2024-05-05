@@ -1,17 +1,18 @@
 "use client"
 
-import EventComponent from "@/components/events";
 import PostComponent from "@/components/post-item";
 import { AddPost } from "@/components/add-post";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import UserProfileComponent from "@/components/user-profile";
+import { SkeletonCard } from "@/components/skeleton-card";
 
 export default function UserProfilePage() {
     const [posts, setPosts] = useState([]);
     const [currUser, setCurruser] = useState({});
     const params = useParams();
+    const [isLoading, setIsLoading] = useState(true);
 
     async function fetchUserPosts() {
         try {
@@ -30,8 +31,15 @@ export default function UserProfilePage() {
     }
 
     useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
         fetchUserPosts();
     }, []);
+
+    if (isLoading) {
+        return <SkeletonCard />;
+    }
 
     return (
         <>

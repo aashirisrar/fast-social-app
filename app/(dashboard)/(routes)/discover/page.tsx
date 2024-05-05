@@ -9,25 +9,32 @@ import { SkeletonCard } from "@/components/skeleton-card";
 
 export default function DiscoverPage() {
     const [people, setPeople] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    async function fetchpeople() {
+        try {
+            const response = await axios.post('/api/people/getpeople');
+            setPeople(response.data.people);
+
+        } catch (error) {
+            console.error('Error fetching user profile:', error);
+        }
+    }
 
     useEffect(() => {
-        async function fetchpeople() {
-            try {
-                const response = await axios.post('/api/people/getpeople');
-                setPeople(response.data.people);
-
-            } catch (error) {
-                console.error('Error fetching user profile:', error);
-            }
-        }
-
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
         fetchpeople();
     }, []);
 
 
+    if (isLoading) {
+        return <SkeletonCard />;
+    }
+
     return (
         <>
-            <Suspense fallback={<p>loading</p>}>
             <div className="flex items-center justify-between">
                 <h1 className="text-lg font-semibold md:text-2xl">Discover People</h1>
                 <AddPost />
@@ -56,10 +63,8 @@ export default function DiscoverPage() {
                 </div>
                 <div>
                     <EventComponent />
-                    <EventComponent />
                 </div>
             </div>
-                </Suspense>
         </>
     );
 }

@@ -5,24 +5,32 @@ import { AddPost } from "@/components/add-post";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AddFriendComponent from "@/components/add-friends";
+import { SkeletonCard } from "@/components/skeleton-card";
 
 export default function SocietiesPage() {
     const [societies, setSocieties] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    async function fetchSocieties() {
+        try {
+            const response = await axios.post('/api/societies/getsocieties');
+            setSocieties(response.data.societies);
+
+        } catch (error) {
+            console.error('Error fetching user profile:', error);
+        }
+    }
 
     useEffect(() => {
-        async function fetchSocieties() {
-            try {
-                const response = await axios.post('/api/societies/getsocieties');
-                setSocieties(response.data.societies);
-
-            } catch (error) {
-                console.error('Error fetching user profile:', error);
-            }
-        }
-
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
         fetchSocieties();
     }, []);
 
+    if (isLoading) {
+        return <SkeletonCard />;
+    }
 
     return (
         <>
@@ -31,7 +39,7 @@ export default function SocietiesPage() {
                 <AddPost />
             </div>
             <div
-                className="flex justify-between gap-4 rounded-lg border border-dashed shadow-sm"
+                className="flex justify-between gap-4 rounded-lg shadow-sm"
                 x-chunk="dashboard-02-chunk-1"
             >
                 {/* <div className="flex flex-col items-center gap-1 text-center">
@@ -46,15 +54,14 @@ export default function SocietiesPage() {
                 <div className="flex flex-col">
                     <div className="grid gap-6 grid-cols-5">
                         {
-                            societies.length !== 0? (
-                            societies.map((friend: any) => (
-                                <AddFriendComponent key={friend.id} {...friend} />
-                            )) ): <div>No Societies Found!</div>
+                            societies.length !== 0 ? (
+                                societies.map((friend: any) => (
+                                    <AddFriendComponent key={friend.id} {...friend} />
+                                ))) : <div>No society found!</div>
                         }
                     </div>
                 </div>
                 <div>
-                    <EventComponent />
                     <EventComponent />
                 </div>
             </div>

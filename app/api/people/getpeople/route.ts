@@ -30,7 +30,8 @@ export async function POST(req: Request) {
             where: {
                 id: {
                     notIn: friends.map(friend => friend.followingId)
-                }
+                },
+                active: true
             }
         })
 

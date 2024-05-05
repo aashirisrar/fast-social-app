@@ -38,7 +38,7 @@ export function PassForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
       try {
-        const resp = await axios.post("api/updatepassword", values);
+        const resp = await axios.post("api/profile/updatepassword", values);
         setError(resp.data.error);
         setSuccess(resp.data.success);
       } catch (error) {

@@ -13,7 +13,7 @@ export default function HomePage() {
 
   async function fetchFriendsPost() {
     try {
-      const response = await axios.post("/api/getfriendsposts");
+      const response = await axios.post("/api/post/getfriendsposts");
       setPosts(response.data.posts);
     } catch (error) {
       console.error("Error fetching user profile:", error);
@@ -22,7 +22,7 @@ export default function HomePage() {
 
   async function fetchUserProfile() {
     try {
-      const response = await axios.post("/api/getprofile");
+      const response = await axios.post("/api/profile/getprofile");
       setSociety(response.data.user.isSociety);
     } catch (error) {
       console.error("Error fetching user profile:", error);

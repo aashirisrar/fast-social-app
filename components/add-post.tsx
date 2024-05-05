@@ -52,7 +52,7 @@ export function AddPost() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
         try {
-            const resp = await axios.post("api/addpost", values);
+            const resp = await axios.post("api/post/addpost", values);
             setError(resp.data.error);
             setSuccess(resp.data.success);
             location.reload();

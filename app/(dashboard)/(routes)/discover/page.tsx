@@ -2,9 +2,10 @@
 
 import EventComponent from "@/components/events";
 import { AddPost } from "@/components/add-post";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import axios from "axios";
 import AddFriendComponent from "@/components/add-friends";
+import { SkeletonCard } from "@/components/skeleton-card";
 
 export default function DiscoverPage() {
     const [people, setPeople] = useState([]);
@@ -12,7 +13,7 @@ export default function DiscoverPage() {
     useEffect(() => {
         async function fetchpeople() {
             try {
-                const response = await axios.post('/api/getpeople');
+                const response = await axios.post('/api/people/getpeople');
                 setPeople(response.data.people);
 
             } catch (error) {
@@ -26,6 +27,7 @@ export default function DiscoverPage() {
 
     return (
         <>
+            <Suspense fallback={<p>loading</p>}>
             <div className="flex items-center justify-between">
                 <h1 className="text-lg font-semibold md:text-2xl">Discover People</h1>
                 <AddPost />
@@ -57,6 +59,7 @@ export default function DiscoverPage() {
                     <EventComponent />
                 </div>
             </div>
+                </Suspense>
         </>
     );
 }

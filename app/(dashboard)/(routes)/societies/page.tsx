@@ -7,20 +7,20 @@ import axios from "axios";
 import AddFriendComponent from "@/components/add-friends";
 
 export default function SocietiesPage() {
-    const [people, setPeople] = useState([]);
+    const [societies, setSocieties] = useState([]);
 
     useEffect(() => {
-        async function fetchpeople() {
+        async function fetchSocieties() {
             try {
-                const response = await axios.post('/api/getpeople');
-                setPeople(response.data.people);
+                const response = await axios.post('/api/societies/getsocieties');
+                setSocieties(response.data.societies);
 
             } catch (error) {
                 console.error('Error fetching user profile:', error);
             }
         }
 
-        fetchpeople();
+        fetchSocieties();
     }, []);
 
 
@@ -46,9 +46,10 @@ export default function SocietiesPage() {
                 <div className="flex flex-col">
                     <div className="grid gap-6 grid-cols-5">
                         {
-                            people.map((friend: any) => (
+                            societies.length !== 0? (
+                            societies.map((friend: any) => (
                                 <AddFriendComponent key={friend.id} {...friend} />
-                            ))
+                            )) ): <div>No Societies Found!</div>
                         }
                     </div>
                 </div>

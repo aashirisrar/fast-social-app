@@ -113,8 +113,6 @@
 .signn:hover{
     background-color: black;
     color: #fff;
-    border: 1px solid #FF4820;
-    
 }
 @media screen and (max-width: 1050px) {
     .gpt3__navbar-links_container {

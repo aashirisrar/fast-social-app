@@ -12,7 +12,7 @@ export default function ProfilePage() {
     useEffect(() => {
         async function fetchUserPosts() {
             try {
-                const response = await axios.post('/api/getyourposts');
+                const response = await axios.post('/api/post/getyourposts');
                 setPosts(response.data.posts);
 
             } catch (error) {

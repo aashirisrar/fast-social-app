@@ -56,7 +56,7 @@ export function CreateEvent() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     try {
-      const resp = await axios.post("api/createevent", values);
+      const resp = await axios.post("api/events/createevent", values);
       setError(resp.data.error);
       setSuccess(resp.data.success);
       location.reload();

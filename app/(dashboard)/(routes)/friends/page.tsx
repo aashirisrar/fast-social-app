@@ -5,24 +5,33 @@ import { AddPost } from "@/components/add-post";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import FriendComponent from "@/components/friend-component";
+import { SkeletonCard } from "@/components/skeleton-card";
 
 export default function FriendsPage() {
     const [friends, setFriends] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    async function fetchFriends() {
+        try {
+            const response = await axios.post('/api/friends/getfriends');
+            setFriends(response.data.friends);
+
+        } catch (error) {
+            console.error('Error fetching user profile:', error);
+        }
+    }
 
     useEffect(() => {
-        async function fetchFriends() {
-            try {
-                const response = await axios.post('/api/friends/getfriends');
-                setFriends(response.data.friends);
-
-            } catch (error) {
-                console.error('Error fetching user profile:', error);
-            }
-        }
-
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
         fetchFriends();
     }, []);
 
+
+    if (isLoading) {
+        return <SkeletonCard />;
+    }
 
     return (
         <>

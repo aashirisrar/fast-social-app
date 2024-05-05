@@ -3,10 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { SkeletonCard } from "./skeleton-card";
 
 export default function EventComponent() {
 
   const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function getEvents() {
     const response = await axios.post('/api/events/getevents');
@@ -25,8 +27,15 @@ export default function EventComponent() {
   }
 
   useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
     getEvents();
   }, []);
+
+  if (isLoading) {
+    return <SkeletonCard />;
+  }
 
   return (
     <Card className="mb-4">
@@ -37,20 +46,20 @@ export default function EventComponent() {
         events?.map((event: any, index: any) => {
           return (
             <CardContent key={index} className="grid gap-8">
-               <Link href={"/event/" + event.id}>
-              <div className="flex items-center gap-4 hover:bg-primary-foreground rounded py-2 px-3">
-                <Avatar className="hidden h-9 w-9 sm:flex">
-                  <AvatarImage src={event.userImage} alt="Avatar" />
-                  <AvatarFallback>OM</AvatarFallback>
-                </Avatar>
-                <div className="grid gap-1">
-                  <p className="text-sm font-medium leading-none">{event.name}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {event.details}
-                  </p>
+              <Link href={"/event/" + event.id}>
+                <div className="flex items-center gap-4 hover:bg-primary-foreground rounded py-2 px-3">
+                  <Avatar className="hidden h-9 w-9 sm:flex">
+                    <AvatarImage src={event.userImage} alt="Avatar" />
+                    <AvatarFallback>OM</AvatarFallback>
+                  </Avatar>
+                  <div className="grid gap-1">
+                    <p className="text-sm font-medium leading-none">{event.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {event.details}
+                    </p>
+                  </div>
+                  <div className="ml-auto font-medium">{event.startTime}</div>
                 </div>
-                <div className="ml-auto font-medium">{event.startTime}</div>
-              </div>
               </Link>
             </CardContent>
           );

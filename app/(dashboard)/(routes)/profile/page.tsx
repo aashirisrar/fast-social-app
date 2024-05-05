@@ -5,24 +5,32 @@ import PostComponent from "@/components/post-item";
 import { AddPost } from "@/components/add-post";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { SkeletonCard } from "@/components/skeleton-card";
 
 export default function ProfilePage() {
     const [posts, setPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    async function fetchUserPosts() {
+        try {
+            const response = await axios.post('/api/post/getyourposts');
+            setPosts(response.data.posts);
+
+        } catch (error) {
+            console.error('Error fetching user profile:', error);
+        }
+    }
 
     useEffect(() => {
-        async function fetchUserPosts() {
-            try {
-                const response = await axios.post('/api/post/getyourposts');
-                setPosts(response.data.posts);
-
-            } catch (error) {
-                console.error('Error fetching user profile:', error);
-            }
-        }
-
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
         fetchUserPosts();
     }, []);
 
+    if (isLoading) {
+        return <SkeletonCard />;
+    }
 
     return (
         <>
@@ -51,7 +59,6 @@ export default function ProfilePage() {
                     }
                 </div>
                 <div className="hidden lg:inline">
-                    <EventComponent />
                     <EventComponent />
                 </div>
             </div>

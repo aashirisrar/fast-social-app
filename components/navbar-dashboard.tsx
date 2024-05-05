@@ -35,7 +35,7 @@ const NavbarDashboard = () => {
     useEffect(() => {
         async function fetchUserProfile() {
             try {
-                const response = await axios.post('/api/getprofile');
+                const response = await axios.post('/api/profile/getprofile');
                 setProfilePicture(response.data.user.profilePicture);
 
             } catch (error) {

@@ -13,7 +13,7 @@ export default function HomePage() {
 
   async function fetchFriendsPost() {
     try {
-      const response = await axios.post("/api/post/   posts");
+      const response = await axios.post("/api/post/getfriendsposts");
       setPosts(response.data.posts);
     } catch (error) {
       console.error("Error fetching user profile:", error);

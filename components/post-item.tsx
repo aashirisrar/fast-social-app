@@ -97,7 +97,7 @@ export default function PostComponent({
       <CardContent className="space-y-4">
         <div className="flex flex-col items-start gap-4">
           <p className="text-sm text-muted-foreground">{body}</p>
-          <div className="bg-red-500 w-full">
+          <div className="w-full">
             <Image
               width={400}
               className="w-full"

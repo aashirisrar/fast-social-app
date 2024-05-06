@@ -1,36 +1,10 @@
 "use client"
 
 import EventComponent from "@/components/events";
-import PostComponent from "@/components/post-item";
 import { AddPost } from "@/components/add-post";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { SkeletonCard } from "@/components/skeleton-card";
+import ProfilePostsComponent from "@/components/profile-posts";
 
 export default function ProfilePage() {
-    const [posts, setPosts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    async function fetchUserPosts() {
-        try {
-            const response = await axios.post('/api/post/getyourposts');
-            setPosts(response.data.posts);
-
-        } catch (error) {
-            console.error('Error fetching user profile:', error);
-        }
-    }
-
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 3000);
-        fetchUserPosts();
-    }, []);
-
-    if (isLoading) {
-        return <SkeletonCard />;
-    }
 
     return (
         <>
@@ -51,13 +25,7 @@ export default function ProfilePage() {
               </p>
               <Button className="mt-4">Add Product</Button>
             </div> */}
-                <div className="flex flex-col">
-                    {
-                        posts.map((post: any) => (
-                            <PostComponent key={post.postId} {...post} />
-                        ))
-                    }
-                </div>
+                <ProfilePostsComponent />
                 <div className="hidden lg:inline">
                     <EventComponent />
                 </div>

@@ -37,8 +37,10 @@ export default function HomePage() {
     <>
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">Feed</h1>
-        <AddPost />
-        {society && <CreateEvent />}
+        <div className="flex gap-x-3">
+          <AddPost />
+          {society && <CreateEvent />}
+        </div>
       </div>
       <div
         className="flex justify-between gap-4 rounded-lg shadow-sm"

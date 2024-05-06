@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { EventDisplayComponent } from "@/components/event-display";
+import { SkeletonCard } from "@/components/skeleton-card";
 
 export default function EventPage() {
     const [event, setEvent] = useState({});
     const params = useParams();
+    const [isLoading, setIsLoading] = useState(true);
 
     async function fetchEvent() {
         try {
@@ -20,8 +22,15 @@ export default function EventPage() {
     }
 
     useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
         fetchEvent();
     }, []);
+
+    if (isLoading) {
+        return <SkeletonCard />;
+    }
 
     return (
         <>

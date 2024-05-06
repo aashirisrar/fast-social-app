@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import UploadBtn from "./upload-button";
+import { SkeletonCard } from "./skeleton-card";
 
 const formSchema = z.object({
   userName: z.string(),
@@ -42,6 +43,7 @@ export function EditForm() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [genderplaceholder, setGenderplaceholder] = useState("Select a gender");
+  const [isLoading, setIsLoading] = useState(true);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,31 +66,34 @@ export function EditForm() {
     setSuccess(message);
   }
 
-  useEffect(() => {
-    async function fetchUserProfile() {
-      try {
-        const response = await axios.post("/api/profile/getprofile");
-        const userData = response.data.user;
+  async function fetchUserProfile() {
+    try {
+      const response = await axios.post("/api/profile/getprofile");
+      const userData = response.data.user;
 
-        const dateOfBir = userData.dateOfBirth.split("T")[0];
+      const dateOfBir = userData.dateOfBirth.split("T")[0];
 
-        // Set default values for form fields using fetched user data
-        form.setValue("userName", userData.name || "");
-        form.setValue("firstName", userData.firstName || "");
-        form.setValue("lastName", userData.lastName || "");
-        form.setValue("bio", userData.bio || "");
-        form.setValue("dob", dateOfBir || "1998-01-01");
-        form.setValue("gender", userData.gender || "");
-        form.setValue("image", userData.profilePicture || "");
-        // Set placeholder for gender
-        setGenderplaceholder(userData.gender || "Select a gender");
+      // Set default values for form fields using fetched user data
+      form.setValue("userName", userData.name || "");
+      form.setValue("firstName", userData.firstName || "");
+      form.setValue("lastName", userData.lastName || "");
+      form.setValue("bio", userData.bio || "");
+      form.setValue("dob", dateOfBir || "1998-01-01");
+      form.setValue("gender", userData.gender || "");
+      form.setValue("image", userData.profilePicture || "");
+      // Set placeholder for gender
+      setGenderplaceholder(userData.gender || "Select a gender");
 
-        // form.setValue('password', '');
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
+      // form.setValue('password', '');
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
     }
+  }
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
     fetchUserProfile();
   }, []);
 
@@ -102,6 +107,10 @@ export function EditForm() {
         console.log(error);
       }
     });
+  }
+
+  if (isLoading) {
+    return <SkeletonCard />;
   }
 
   return (

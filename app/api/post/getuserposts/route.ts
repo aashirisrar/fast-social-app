@@ -29,6 +29,16 @@ export async function POST(req: Request) {
             },
         })
 
+        // add user details to the post who made the post
+        for (let post of foundPosts) {
+            const user = await prisma.user.findUnique({
+                where: {
+                    id: post.userId
+                }
+            });
+            post.user = user;
+        }
+
         return NextResponse.json(
             { success: "Posts Found!", user: foundUser, posts: foundPosts },
             { status: 200 }

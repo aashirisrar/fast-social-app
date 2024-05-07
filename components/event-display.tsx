@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 
 export const EventDisplayComponent = ({ event }: any) => {
   return (
@@ -11,13 +11,15 @@ export const EventDisplayComponent = ({ event }: any) => {
             style={{ display: "inline-flex" }}
           >
             <Avatar className="h-20 w-20 ">
-              <AvatarImage src={event.image} alt="Avatar" />
+              <AvatarImage src={event.user.profilePicture} alt="Avatar" />
               <AvatarFallback>OM</AvatarFallback>
             </Avatar>
+            <div>{event.user.name}</div>
             <CardTitle style={{ marginTop: "30px", marginLeft: "10px" }}>
-              {event.name}
+              {event.user.firstName}
             </CardTitle>
           </div>
+          <div className="text-center text-xl">{event.name}</div>
           <div className="flex mt-[25px] ">
             {/* <p className="text-sm font-medium leading-none">{}</p> */}
             <div className="flex-1 w-[30%]">
@@ -30,11 +32,9 @@ export const EventDisplayComponent = ({ event }: any) => {
               >
                 {event.location}
               </p>
+              <p>{event.date}</p>
             </div>
           </div>
-          <div className="mx-auto font-medium"> {event.date}</div>
-          <div className="mx-auto font-medium">{event.startTime}</div>
-          <div className="mx-auto font-medium"> {event.endTime}</div>
           <div className="mx-auto font-medium">Details: {event.details}</div>
         </div>
       </CardContent>

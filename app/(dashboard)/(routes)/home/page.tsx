@@ -55,8 +55,9 @@ export default function HomePage() {
               </p>
               <Button className="mt-4">Add Product</Button>
             </div> */}
-
-        <Posts />
+        <div className="mx-auto">
+          <Posts />
+        </div>
         <div className="hidden lg:inline">
           <EventComponent />
         </div>

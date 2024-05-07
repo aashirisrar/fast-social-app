@@ -5,18 +5,16 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import LikeComponent from "@/components/like";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import Link from "next/link";
 
 export default function PostComponent({
-  userId,
   body,
   image,
   likeCount,
   commentCount,
   postId,
   createdAt,
+  user
 }: any) {
   function calculateTimeDifference(
     timeCreatedAt: Date | string | number
@@ -48,43 +46,18 @@ export default function PostComponent({
     }
   }
 
-  const [userName, setUserName] = useState("");
-  const [imageSrc, setImageSrc] = useState("");
-  const [name, setName] = useState("");
-
-  // get username of the user who posted the post
-  useEffect(() => {
-    async function fetchUserNames() {
-      try {
-        const response = await axios.post("/api/post/getusername", {
-          userId: userId,
-        });
-        setUserName(response.data.user.name);
-        setImageSrc(response.data.user.profilePicture);
-        // for setting the fallback of avatar
-        setName(
-          response.data.user.firstName[0] + response.data.user.lastName[0]
-        );
-      } catch (error) {
-        console.error("Error incrementing likes:", error);
-      }
-    }
-
-    fetchUserNames();
-  }, []);
-
   return (
     <Card className="space-y-2 px-6 mb-4 w-[80%] mx-auto">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <div className="flex items-center gap-4">
           <Avatar className="hidden h-9 w-9 sm:flex">
-            <AvatarImage src={imageSrc} alt={postId} />
-            <AvatarFallback>{name}</AvatarFallback>
+            <AvatarImage src={user.profilePicture} alt={postId} />
+            <AvatarFallback>{user.firstName}</AvatarFallback>
           </Avatar>
           <div className="grid gap-1">
-            <Link href={"/user/" + userName}>
+            <Link href={"/user/" + user.name}>
               <p className="text-sm font-medium leading-none hover:underline">
-                {userName}
+                {user.name}
               </p>
             </Link>
             <p className="text-sm text-muted-foreground">

@@ -26,7 +26,7 @@ import {
 } from "./ui/select";
 
 const formSchema = z.object({
-  email: z.string(),
+  email: z.string().max(21, "Enter valid email address: lXXXXXX@lhr.nu.edu.pk").min(21, "Enter valid email address: lXXXXXX@lhr.nu.edu.pk").includes("@lhr.nu.edu.pk"),
   userName: z.string(),
   password: z.string(),
   firstName: z.string(),
@@ -249,7 +249,7 @@ export function SignUpForm() {
           <Button
             type="submit"
             className="w-full"
-            style={{ marginTop: "50px" }}
+            style={{ marginTop: "25px" }}
           >
             Create Profile
           </Button>

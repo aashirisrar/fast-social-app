@@ -40,6 +40,6 @@ export async function POST(req: Request) {
             { status: 200 }
         );
     } catch (e) {
-        return NextResponse.json({ error: e }, { status: 500 });
+        return NextResponse.json({ error: "User with this email and username already exists!" }, { status: 200 });
     }
 }

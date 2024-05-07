@@ -20,12 +20,12 @@ const FriendComponent = ({ firstName, lastName, name, profilePicture }: any) => 
                 <div className="text-md font-medium">{firstName + " " + lastName}</div>
                 <div className="text-sm text-muted-foreground font-medium mb-2 break-words">{name}</div>
                 <div className="flex flex-col gap-1 items-center">
-                    <Link href={"/user/" + name}>
-                        <Button className="w-full" variant="outline"
-                        >
+                    <Button className="w-full md:text-sm" variant="outline"
+                    >
+                        <Link href={"/user/" + name}>
                             View Profile
-                        </Button>
-                    </Link>
+                        </Link>
+                    </Button>
                 </div>
             </div>
         </div>

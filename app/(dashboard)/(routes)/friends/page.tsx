@@ -40,7 +40,7 @@ export default function FriendsPage() {
                 <AddPost />
             </div>
             <div
-                className="flex justify-between gap-4 rounded-lg shadow-sm"
+                className="flex sm:justify-between gap-0 rounded-lg shadow-sm sm:gap-4 justify-center"
                 x-chunk="dashboard-02-chunk-1"
             >
                 {/* <div className="flex flex-col items-center gap-1 text-center">
@@ -53,7 +53,7 @@ export default function FriendsPage() {
               <Button className="mt-4">Add Product</Button>
             </div> */}
                 <div className="flex flex-col">
-                    <div className="grid gap-6 grid-cols-5">
+                    <div className="grid gap-0 grid-cols-1 md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 sm:gap-3 md:gap-3 lg:gap-5">
                         {
                             friends.map((friend: any) => (
                                 <FriendComponent key={friend.id} {...friend} />
@@ -61,8 +61,7 @@ export default function FriendsPage() {
                         }
                     </div>
                 </div>
-                <div>
-                    <EventComponent />
+                <div className="hidden sm:block">
                     <EventComponent />
                 </div>
             </div>

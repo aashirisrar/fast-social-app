@@ -114,7 +114,7 @@ export function SignInFormComponent() {
                 <FormError message={error} />
                 <FormSuccess message={success} />
 
-                <Button type="submit" className="w-full mt-10">
+                <Button type="submit" className="w-full mt-8">
                   Login
                 </Button>
                 <div className="text-center text-sm ">

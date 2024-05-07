@@ -25,7 +25,9 @@ export default function ProfilePage() {
               </p>
               <Button className="mt-4">Add Product</Button>
             </div> */}
-                <ProfilePostsComponent />
+                <div className="mx-auto">
+                    <ProfilePostsComponent />
+                </div>
                 <div className="hidden lg:inline">
                     <EventComponent />
                 </div>

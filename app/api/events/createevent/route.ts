@@ -30,6 +30,7 @@ export async function POST(req: Request) {
                 details,
                 image,
                 userId: currentUser?.id!,
+                date: new Date(date)
             },
         })
 

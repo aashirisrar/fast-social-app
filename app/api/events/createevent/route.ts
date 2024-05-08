@@ -5,7 +5,7 @@ import { auth } from "@/lib/auth";
 export async function POST(req: Request) {
     try {
         const { name, location, date, details, image } = await req.json();
-
+        console.log(date);
         const session = await auth();
 
         if (!session) {
@@ -30,6 +30,7 @@ export async function POST(req: Request) {
                 details,
                 image,
                 userId: currentUser?.id!,
+                date: new Date(date)
             },
         })
 

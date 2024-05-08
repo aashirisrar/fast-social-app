@@ -152,7 +152,7 @@ export function CreateEvent() {
                     <FormLabel>Date:</FormLabel>
                     <FormControl>
                       <Input
-                        type="date"
+                        type="datetime-local"
                         {...field}
                         required
                       />

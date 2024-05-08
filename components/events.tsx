@@ -15,12 +15,12 @@ export default function EventComponent() {
 
     // convert time in response to am/pm format
     response.data.events.forEach((event: any) => {
-      const date = new Date(event.startTime);
+      const date = new Date(event.date);
       const hours = date.getHours();
       const minutes = date.getMinutes();
       const ampm = hours >= 12 ? 'pm' : 'am';
       const formattedTime = hours + ':' + minutes + ' ' + ampm;
-      event.startTime = formattedTime;
+      event.date = formattedTime;
     });
 
     setEvents(response.data.events);
@@ -58,7 +58,7 @@ export default function EventComponent() {
                       {event.details}
                     </p>
                   </div>
-                  <div className="ml-auto font-medium">{event.startTime}</div>
+                  <div className="ml-auto font-medium">{event.date}</div>
                 </div>
               </Link>
             </CardContent>

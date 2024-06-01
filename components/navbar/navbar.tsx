@@ -4,6 +4,7 @@ import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import "./navbar.css"
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Box } from 'lucide-react';
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -11,7 +12,10 @@ const Navbar = () => {
     <div className='gpt3__navbar flex justify-between items-center px-8 py-8'>
       <div className='gpt3__navbar-links flex items-center'>
         <div className='gpt3__navbar-links_logo'>
-          <h1><strong>Uni-Net</strong></h1>
+          <div className='flex text-primary-foreground items-center gap-2'>
+            <Box />
+            <h1 ><strong> Connect Inc</strong></h1>
+          </div>
         </div>
         <div className='gpt3__navbar-links_container hidden lg:flex flex-row'>
           <p><a href='#home'>Home</a></p>

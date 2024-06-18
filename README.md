@@ -1,34 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Connect Inc.
 
-## Getting Started
+Connect Inc. is a social media application designed for university students, facilitating a vibrant community experience with features tailored to campus life. Built using modern technologies like Next.js, React, Tailwind CSS, Shadcn UI library, Prisma as ORM, TypeScript, and PostgreSQL, Connect Inc. offers a seamless and responsive platform for students to connect and engage.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- **Create Posts:** Users can share updates, announcements, and thoughts with their network.
+- **Feed:** A dynamic feed displays posts from friends, clubs, and societies users follow.
+- **Make Friends:** Connect with other students across campus to expand your social circle.
+- **Clubs and Societies:** Explore and join various clubs or societies to stay updated with their activities.
+- **Events:** View and create events hosted by clubs and societies, enhancing campus engagement.
+- **Discover New Friends:** Find and connect with students who share similar interests.
+- **Like Posts:** Interact with content by liking posts shared within the network.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js:** React framework for server-side rendering and front-end development.
+- **React:** Building dynamic and interactive user interfaces.
+- **Tailwind CSS:** Utility-first CSS framework for styling components.
+- **Shadcn UI Library:** Enhancing UI components for a modern and intuitive user experience.
+- **Prisma:** ORM (Object-Relational Mapping) for TypeScript and PostgreSQL, simplifying database interactions.
+- **TypeScript:** Adding type safety and scalability to the application.
+- **PostgreSQL:** Robust relational database management system for storing app data.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Future Enhancements
 
-## Learn More
+- **Messaging System:** Enable direct messaging between users for private conversations.
+- **Notifications:** Implement real-time notifications for friend requests, likes, and event updates.
+- **Advanced Search:** Allow users to search for clubs, events, and friends with filters.
+- **Accessibility Features:** Improve accessibility for users with diverse needs.
+- **Mobile App Development:** Expand platform availability with native mobile applications.
 
-To learn more about Next.js, take a look at the following resources:
+## Conclusion
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Connect Inc. aims to foster a connected and engaged community among university students, providing a feature-rich platform with a focus on usability and community building. By leveraging cutting-edge technologies and user-centric design principles, this app aims to enhance the student experience both academically and socially.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Author
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Your Name - [Aashir Israr](https://github.com/aashirisrar)
+
+## Acknowledgments
+
+Special thanks to all contributors and supporters who have contributed to making Connect Inc. a vibrant community platform.
+
+## How to Use
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/connect-inc.git

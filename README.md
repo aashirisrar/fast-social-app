@@ -38,10 +38,6 @@ Connect Inc. aims to foster a connected and engaged community among university s
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
 
-## Author
-
-Your Name - [Aashir Israr](https://github.com/aashirisrar)
-
 ## Acknowledgments
 
 Special thanks to all contributors and supporters who have contributed to making Connect Inc. a vibrant community platform.

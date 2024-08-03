@@ -36,7 +36,7 @@ Connect Inc. aims to foster a connected and engaged community among university s
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
 ## Acknowledgments
 
@@ -46,4 +46,4 @@ Special thanks to all contributors and supporters who have contributed to making
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/connect-inc.git
+   git clone https://github.com/aashirisrar/fast-social-app.git
